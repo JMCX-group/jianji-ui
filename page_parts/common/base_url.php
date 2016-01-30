@@ -4,4 +4,4 @@
  * Date: 2016/1/30
  */
 ?>
-<base href="http://127.0.0.1/jianji/">
+<base href="http://101.200.177.120/jianji-demo/">
