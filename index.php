@@ -408,7 +408,7 @@
             <div class="cf-row" data-cf-layout='{
                     "fontSize":0,
                     "paddingBottom":6
-                }'><img src="img/temp/skin_dark/main_page.png"></div>
+                }'><img src="img/temp/skin_dark/main_page.png" data-cf-layout='{"width":34}'></div>
             <div class="cf-row">主页</div>
             </div>
         <div class="cf-col-x cf-text-center" data-cf-layout='{
@@ -417,7 +417,7 @@
             <div class="cf-row page-operation-write" data-cf-layout='{
                     "fontSize":0,
                     "paddingBottom":6
-                }'><img src="img/temp/skin_dark/write_blog.png"></div>
+                }'><img src="img/temp/skin_dark/write_blog.png" data-cf-layout='{"width":34}'></div>
             <div class="cf-row page-operation-write">记录</div>
         </div>
         <div class="cf-col-x" data-cf-layout='{
@@ -426,7 +426,7 @@
             <div class="cf-row" data-cf-layout='{
                     "fontSize":0,
                     "paddingBottom":6
-                }'><img src="img/temp/skin_dark/personal_center.png"></div>
+                }'><img src="img/temp/skin_dark/personal_center.png" data-cf-layout='{"width":34}'></div>
             <div class="cf-row">个人</div>
         </div>
     </div>
