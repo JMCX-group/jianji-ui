@@ -5,5 +5,5 @@
  */
 ?>
 <style>
-    @font-face { font-family: 'AvenirNextLTPro-Regular'; src: url('http://127.0.0.1/jianji/font/AvenirNextLTPro-Regular.otf') format('opentype');}
+    @font-face { font-family: 'AvenirNextLTPro-Regular'; src: url('http://101.200.177.120/jianji-demo/font/AvenirNextLTPro-Regular.otf') format('opentype');}
 </style>
