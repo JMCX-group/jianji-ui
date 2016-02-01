@@ -55,18 +55,41 @@
             border-bottom: 0;
         }
 
-        #page-footer{
-            position: absolute;
+        #page-main-footer,
+        #page-pre-publish-footer,
+        #page-publish-footer{
+            position: fixed;
             left: 50%;
             bottom: 0;
             background-color: rgb(44,44,52);
             color:#fff;
         }
+
+        #page-publish-top{
+            background-color: rgba(0,0,0,0.2);
+            color:#fff;
+            font-size: 0;
+        }
+        #page-edit-ext-info{
+            color: #fff;
+        }
+
+        #page-edit-ext-info .page-ext-info-entry{
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        #page-edit-ext-info .page-ext-info-entry.page-last{border: 0}
+
+        /*begin: debug*/
+        #page-main-panel{
+            display: none;
+        }
+        /*end: debug*/
     </style>
 </head>
 <body class="cf-invisible">
-<img src="img/temp/skin_dark/demo_bkg.jpg" class="cf-img-bkg">
-<div class="cf-wrap">
+<div class="cf-wrap" id="page-main-panel">
+    <img src="img/temp/skin_dark/demo_bkg.jpg" class="cf-img-bkg">
     <div class="cf-row cf-text-center" data-cf-layout='{
             "paddingTop":100,
             "paddingBottom":40
@@ -394,45 +417,245 @@
         </div>
     <!--    end: audio demo -->
     </div>
-    <div class="cf-row" id="page-footer" data-cf-layout='{
-            "position":"fixed",
-            "height":98,
-            "paddingTop":22,
-            "fontSize":20,
-            "marginLeft":-320,
-            "width":640
-        }'>
-        <div class="cf-col-x cf-text-right" data-cf-layout='{
-                "width":90
+</div>
+
+
+<div class="cf-wrap" id="page-publish-panel" data-cf-layout='{"paddingBottom":124}'>
+    <img src="img/temp/publish/bkg.png" class="cf-img-bkg">
+    <div class="cf-row" id="page-publish-top"
+         data-cf-layout='{
+                "paddingTop":68,
+                "paddingBottom":30
             }'>
-            <div class="cf-row" data-cf-layout='{
-                    "fontSize":0,
-                    "paddingBottom":6
-                }'><img src="img/temp/skin_dark/main_page.png" data-cf-layout='{"width":34}'></div>
-            <div class="cf-row">主页</div>
-            </div>
-        <div class="cf-col-x cf-text-center" data-cf-layout='{
-                "width":460
+        <div class="cf-row" data-cf-layout='{
+                "height":30,
+                "lineHeight":30
             }'>
-            <div class="cf-row page-operation-write" data-cf-layout='{
-                    "fontSize":0,
-                    "paddingBottom":6
-                }'><img src="img/temp/skin_dark/write_blog.png" data-cf-layout='{"width":34}'></div>
-            <div class="cf-row page-operation-write">记录</div>
+            <div class="cf-col-x page-go-back-to-index" data-cf-layout='{
+                "paddingLeft":20,
+                "height":30,
+                "width":70,
+                "fontSize":24
+            }'>返回</div>
+            <div class="cf-col-x" data-cf-layout='{
+                    "textAlign":"center",
+                    "fontSize":30,
+                    "height":30,
+                    "width":500
+                }'>编辑</div>
+            <div class="cf-col-x page-go-to-setting" data-cf-layout='{
+                "paddingRight":20,
+                "width":70,
+                "paddingTop":4,
+                "height":30,
+                "textAlign":"right"
+            }'><img src="img/temp/publish/setting.png" data-cf-layout='{
+                    "width":26
+                }'></div>
         </div>
+    </div>
+
+    <div class="cf-row" data-cf-layout='{
+            "paddingTop":40,
+            "width":540,
+            "marginLeft":50,
+            "marginRight":50
+        }'>
         <div class="cf-col-x" data-cf-layout='{
-                "width":90
+                "fontSize":0,
+                "lineHeight":28
             }'>
             <div class="cf-row" data-cf-layout='{
-                    "fontSize":0,
-                    "paddingBottom":6
-                }'><img src="img/temp/skin_dark/personal_center.png" data-cf-layout='{"width":34}'></div>
-            <div class="cf-row">个人</div>
+                    "width":140,
+                    "fontSize":28,
+                    "height":28,
+                    "color":"rgb(255,255,255)"
+                }'>情绪能量</div>
+        </div>
+    </div>
+
+    <div class="cf-row" data-cf-layout='{
+            "paddingTop":20,
+            "marginLeft":50,
+            "marginRight":50,
+            "fontSize":0,
+            "width":540
+        }'>
+        <img src="img/temp/publish/add_img_bkg.jpg" data-cf-layout='{"width":540,"left":0,"top":20}' class="cf-img-bkg">
+        <div class="cf-row" data-cf-layout='{
+                "position":"absolute",
+                "left":20,
+                "top":40,
+                "height":20,
+                "lineHeight":20,
+                "fontSize":20,
+                "color":"rgba(255,255,255,0.4)"
+            }'>添加照片(最多9张)</div>
+        <div class="cf-row" data-cf-layout='{
+                "paddingTop":94,
+                "position":"absolute",
+                "textAlign":"center"
+            }'><img src="img/temp/publish/add_img_btn.png" data-cf-layout='{
+                    "width":112
+                }'>
+        </div>
+        <div class="cf-row" data-cf-layout='{
+                "width":540,
+                "marginTop":300,
+                "paddingBottom":20,
+                "backgroundColor":"rgb(64,64,74)"
+            }'>
+            <textarea placeholder="添加文字" data-cf-layout='{
+                    "boxSizing":"border-box",
+                    "backgroundColor":"rgb(64,64,74)",
+                    "width":540,
+                    "height":140,
+                    "border":0,
+                    "paddingLeft":20,
+                    "paddingRight":20,
+                    "paddingTop":20,
+                    "resize":"none",
+                    "outline":"none",
+                    "fontSize":20,
+                    "color":"#fff"
+                }'></textarea>
+        </div>
+    </div>
+
+    <div class="cf-row" id="page-edit-ext-info" data-cf-layout='{
+            "width":550,
+            "marginLeft":50,
+            "marginRight":50,
+            "paddingTop":10
+        }'>
+        <div class="cf-row page-ext-info-entry" data-cf-layout='{
+                "height":60,
+                "width":540,
+                "lineHeight":60
+            }'>
+            <div class="cf-col-x" data-cf-layout='{"width":30}'><img src="img/temp/publish/icon_tag.png" class="cf-img-bkg" data-cf-layout='{"width":30,"marginTop":20}'></div>
+            <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22}'>添加标签</div>
+            <div class="cf-col-x" data-cf-layout='{"width":20,"textAlign":"right"}'><img src="img/temp/publish/icon_arrow.png" data-cf-layout='{"width":14}'></div>
+        </div>
+
+        <div class="cf-row page-ext-info-entry" data-cf-layout='{
+                "height":60,
+                "width":540,
+                "lineHeight":60
+            }'>
+            <div class="cf-col-x" data-cf-layout='{"width":30}'><img src="img/temp/publish/icon_location.png" class="cf-img-bkg" data-cf-layout='{"width":30,"marginTop":20}'></div>
+            <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22}'>添加位置</div>
+            <div class="cf-col-x" data-cf-layout='{"width":20,"textAlign":"right"}'><img src="img/temp/publish/icon_arrow.png" data-cf-layout='{"width":14}'></div>
+        </div>
+
+        <div class="cf-row page-ext-info-entry" data-cf-layout='{
+                "height":60,
+                "width":540,
+                "lineHeight":60
+            }'>
+            <div class="cf-col-x" data-cf-layout='{"width":30}'><img src="img/temp/publish/icon_public.png" class="cf-img-bkg" data-cf-layout='{"width":30,"marginTop":20}'></div>
+            <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22}'>公开</div>
+            <div class="cf-col-x" data-cf-layout='{"width":20,"textAlign":"right"}'><img src="img/temp/publish/icon_arrow.png" data-cf-layout='{"width":14}'></div>
+        </div>
+
+        <div class="cf-row page-ext-info-entry page-last" data-cf-layout='{
+                "height":60,
+                "width":540,
+                "lineHeight":60
+            }'>
+            <div class="cf-col-x" data-cf-layout='{"width":30}'><img src="img/temp/publish/icon_sync.png" class="cf-img-bkg" data-cf-layout='{"width":30,"marginTop":20}'></div>
+            <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22}'>同步至</div>
+            <div class="cf-col-x" data-cf-layout='{"width":20,"textAlign":"right"}'><img src="img/temp/publish/icon_arrow.png" data-cf-layout='{"width":14}'></div>
+        </div>
+
+        <div class="cf-row">
+            <div class="cf-col-x" data-cf-layout='{
+                    "width":100,
+                    "height":100,
+                    "marginRight":10
+                }'><img src="img/temp/publish/share_wechat.png" data-cf-layout='{"width":100}' class="cf-img-bkg">
+            </div>
+
+            <div class="cf-col-x" data-cf-layout='{
+                    "width":100,
+                    "height":100,
+                    "marginRight":10
+                }'><img src="img/temp/publish/share_friend.png" data-cf-layout='{"width":100}' class="cf-img-bkg">
+            </div>
+
+            <div class="cf-col-x" data-cf-layout='{
+                    "width":100,
+                    "height":100,
+                    "marginRight":10
+                }'><img src="img/temp/publish/share_qq.png" data-cf-layout='{"width":100}' class="cf-img-bkg">
+            </div>
+
+            <div class="cf-col-x" data-cf-layout='{
+                    "width":100,
+                    "height":100,
+                    "marginRight":10
+                }'><img src="img/temp/publish/share_weibo.png" data-cf-layout='{"width":100}' class="cf-img-bkg">
+            </div>
+
+            <div class="cf-col-x" data-cf-layout='{
+                    "width":100,
+                    "height":100,
+                    "marginRight":10
+                }'><img src="img/temp/publish/share_douban.png" data-cf-layout='{"width":100}' class="cf-img-bkg">
+            </div>
         </div>
     </div>
 </div>
+
+<div class="cf-row" id="page-publish-footer" data-cf-layout='{
+        "height":98,
+        "lineHeight":98,
+        "textAlign":"center",
+        "fontSize":36,
+        "marginLeft":-320,
+        "width":640
+    }'>发布</div>
+
+<div class="cf-row" id="page-pre-publish-footer"></div>
+
+<!--<div class="cf-row" id="page-main-footer" data-cf-layout='{-->
+<!--            "height":98,-->
+<!--            "paddingTop":22,-->
+<!--            "fontSize":20,-->
+<!--            "marginLeft":-320,-->
+<!--            "width":640-->
+<!--        }'>-->
+<!--    <div class="cf-col-x cf-text-right" data-cf-layout='{-->
+<!--                "width":90-->
+<!--            }'>-->
+<!--        <div class="cf-row" data-cf-layout='{-->
+<!--                    "fontSize":0,-->
+<!--                    "paddingBottom":6-->
+<!--                }'><img src="img/temp/skin_dark/main_page.png" data-cf-layout='{"width":34}'></div>-->
+<!--        <div class="cf-row">主页</div>-->
+<!--    </div>-->
+<!--    <div class="cf-col-x cf-text-center" data-cf-layout='{-->
+<!--                "width":460-->
+<!--            }'>-->
+<!--        <div class="cf-row page-operation-write" data-cf-layout='{-->
+<!--                    "fontSize":0,-->
+<!--                    "paddingBottom":6-->
+<!--                }'><img src="img/temp/skin_dark/write_blog.png" data-cf-layout='{"width":34}'></div>-->
+<!--        <div class="cf-row page-operation-write">记录</div>-->
+<!--    </div>-->
+<!--    <div class="cf-col-x" data-cf-layout='{-->
+<!--                "width":90-->
+<!--            }'>-->
+<!--        <div class="cf-row" data-cf-layout='{-->
+<!--                    "fontSize":0,-->
+<!--                    "paddingBottom":6-->
+<!--                }'><img src="img/temp/skin_dark/personal_center.png" data-cf-layout='{"width":34}'></div>-->
+<!--        <div class="cf-row">个人</div>-->
+<!--    </div>-->
+<!--</div>-->
 <?php require_once(dirname(__FILE__).'/page_parts/common/js.php');?>
 <!--1.0.18-->
 <script src="js/page/index.js?v=0.0.1"></script>
+
 </body>
 </html>
