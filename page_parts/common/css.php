@@ -5,4 +5,4 @@
  */
 ?>
 <link rel="stylesheet" href="css/core/core.css?v=1.0.17">
- 
+<link rel="stylesheet" href="css/animate.css">
