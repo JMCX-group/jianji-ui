@@ -82,7 +82,7 @@
 
         #page-pre-publish-panel{
             position: fixed;
-            left:0;
+            left:50%;
             bottom: 0;
         }
 
@@ -95,14 +95,19 @@
             position: fixed;
             left:0;
             top:0;
+            display: none;
             background-color: rgba(37,37,37,0.95);
         }
 
         /*begin: debug*/
         #page-main-footer{
-            display: none;
+            /*display: none;*/
         }
         #page-publish-footer{
+            display: none;
+        }
+
+        #page-pre-publish-footer{
             display: none;
         }
         #page-main-panel{
@@ -111,7 +116,7 @@
         #page-publish-panel{
             display: none;
         }
-        #page-publish-panel{
+        #page-pre-publish-panel{
             display: none;
         }
         /*end: debug*/
@@ -454,6 +459,36 @@
 
 <div class="cf-row" id="page-blur-mask"></div>
 
+<!-- begin: 预发布界面 -->
+<div class="cf-wrap" id="page-pre-publish-panel" data-cf-layout='{
+        "marginLeft":-320
+    }'>
+    <div class="cf-row" id="page-pre-publish-type-panel" data-cf-layout='{
+            "height":220,
+            "paddingLeft":50,
+            "fontSize":0,
+            "paddingRight":50
+        }'>
+        <div class="cf-col-3x" id="page-publish-text">
+            <img src="img/temp/pre_publish/text.png" data-cf-layout='{"width":110}'>
+            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>文章</span>
+        </div>
+        <div class="cf-col-3x" id="page-publish-photo">
+            <img src="img/temp/pre_publish/photo.png" data-cf-layout='{"width":110}'>
+            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>图片</span>
+        </div>
+        <div class="cf-col-3x" id="page-publish-video">
+            <img src="img/temp/pre_publish/video.png" data-cf-layout='{"width":110}'>
+            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>视频</span>
+        </div>
+        <div class="cf-col-3x" id="page-publish-audio">
+            <img src="img/temp/pre_publish/audio.png" data-cf-layout='{"width":110}'>
+            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>语音</span>
+        </div>
+    </div>
+</div>
+<!-- end: 预发布界面 -->
+
 <!-- begin: 发布界面 -->
 <div class="cf-wrap" id="page-publish-panel" data-cf-layout='{"paddingBottom":124}'>
     <img src="img/temp/publish/bkg.png" class="cf-img-bkg">
@@ -643,53 +678,6 @@
 </div>
 <!-- end: 发布界面 -->
 
-<!-- begin: 预发布界面 -->
-<div class="cf-wrap" id="page-pre-publish-panel">
-    <div class="cf-row" id="page-pre-publish-type-panel" data-cf-layout='{
-            "height":220,
-            "paddingLeft":50,
-            "fontSize":0,
-            "paddingRight":50
-        }'>
-        <div class="cf-col-3x">
-            <img src="img/temp/pre_publish/text.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>文章</span>
-        </div>
-        <div class="cf-col-3x">
-            <img src="img/temp/pre_publish/photo.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>图片</span>
-        </div>
-        <div class="cf-col-3x">
-            <img src="img/temp/pre_publish/video.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>视频</span>
-        </div>
-        <div class="cf-col-3x">
-            <img src="img/temp/pre_publish/audio.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>语音</span>
-        </div>
-    </div>
-</div>
-<!-- end: 预发布界面 -->
-
-
-<div class="cf-row" id="page-publish-footer" data-cf-layout='{
-        "height":98,
-        "lineHeight":98,
-        "textAlign":"center",
-        "fontSize":36,
-        "marginLeft":-320,
-        "width":640
-    }'>发布</div>
-
-<div class="cf-row" id="page-pre-publish-footer" data-cf-layout='{
-        "height":98,
-        "lineHeight":98,
-        "textAlign":"center",
-        "fontSize":36,
-        "marginLeft":-320,
-        "width":640
-    }'><img src="img/temp/pre_publish/btn_close.png" data-cf-layout='{"width":30}'></div>
-
 <div class="cf-row" id="page-main-footer" data-cf-layout='{
             "height":98,
             "paddingTop":22,
@@ -725,18 +713,87 @@
         <div class="cf-row">个人</div>
     </div>
 </div>
+
+<div class="cf-row" id="page-pre-publish-footer" data-cf-layout='{
+        "height":98,
+        "lineHeight":98,
+        "textAlign":"center",
+        "fontSize":36,
+        "marginLeft":-320,
+        "width":640
+    }'><img src="img/temp/pre_publish/btn_close.png" id="page-pre-publish-close" data-cf-layout='{"width":30}'></div>
+
+<div class="cf-row" id="page-publish-footer" data-cf-layout='{
+        "height":98,
+        "lineHeight":98,
+        "textAlign":"center",
+        "fontSize":36,
+        "marginLeft":-320,
+        "width":640
+    }'>发布</div>
+
 <?php require_once(dirname(__FILE__).'/page_parts/common/js.php');?>
 <!--1.0.18-->
 <script src="js/page/index.js?v=0.0.1"></script>
 <script>
-    function scence_swap(){
+
+    function page_init(){
+        g_jq_dom = $.extend({}, g_jq_dom, {
+            $main_page:{
+                $panel:$("#page-main-panel"),
+                $footer:$("#page-main-footer")
+            },
+            $pre_publish_page:{
+                $panel:$("#page-pre-publish-panel"),
+                $footer:$("#page-pre-publish-footer"),
+                $buttons:{
+                    $publish_text:$("#page-publish-text"),
+                    $publish_photo:$("#page-publish-photo"),
+                    $publish_video:$("#page-publish-video"),
+                    $publish_audio:$("#page-publish-audio"),
+                    $close_btn:$("#page-pre-publish-close")
+                }
+            },
+            $publish_page:{
+                $panel:$("#page-publish-panel"),
+                $footer:$("#page-publish-footer")
+            },
+            $page_mask:$("#page-blur-mask"),
+            $page_opt:{
+                $write:$(".page-operation-write")
+            }
+        });
+    }
+
+    function scene_swap_to_pre_publish(){
+        g_jq_dom.$page_mask.stop().fadeIn(200);
+        g_jq_dom.$pre_publish_page.$panel.show().removeClass("animated fadeOutDown").addClass("animated fadeInUp");
+        g_jq_dom.$pre_publish_page.$footer.fadeIn(200);
+    }
+
+    function scene_swap_to_main(){
+        g_jq_dom.$page_mask.stop().fadeOut(200);
+        g_jq_dom.$pre_publish_page.$panel.removeClass("animated fadeInUp").addClass("animated fadeOutDown");
+        g_jq_dom.$pre_publish_page.$footer.fadeOut(200);
+    }
+
+    function scene_swap_to_publish(){
 
     }
+
+    function page_event_bind(){
+        g_jq_dom.$page_opt.$write.on("touchend", scene_swap_to_pre_publish);
+        g_jq_dom.$pre_publish_page.$buttons.$close_btn.on("touchend", scene_swap_to_main);
+    }
+
     $(function(){
-        var $blur_mask = $("#page-blur-mask");
+        page_init();
+        page_event_bind();
+        var $blur_mask = g_jq_dom.$page_mask;
         $blur_mask.css({
             "height":g_var.wnd_height
         });
+
     });
 </script>
 </body>
