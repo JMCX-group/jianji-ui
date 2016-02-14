@@ -97,6 +97,10 @@ function page_layout($el, undefined){
             layout_cfg.fontSize = Math.floor(layout_cfg.fontSize * g_var.scale_ratio)+"px";
         }
 
+        if(layout_cfg.letterSpacing){
+            layout_cfg.letterSpacing = Math.floor(layout_cfg.letterSpacing * g_var.scale_ratio)+"px";
+        }
+
         if(layout_cfg.verticalCenter){
             if(!layout_cfg.lineHeight){
                 layout_cfg.lineHeight = Math.floor(layout_cfg.height)+'px';
