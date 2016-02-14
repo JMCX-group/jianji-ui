@@ -16,7 +16,7 @@ var g_var = {
     max_width:640,
     scroll_bar_width:null,
     base_url:location.href.split("#")[0],
-    baseUrl:'http://'+document.domain+'/wxadmin/',
+    baseUrl:'http://'+document.domain+'/jianji-demo/',
     target_category:location.href.split("#")[1],
     current_page_scroll_top:0
 };
