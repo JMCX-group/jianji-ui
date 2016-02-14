@@ -8,4 +8,4 @@
 <script src="js/lib/jquery-2.1.4.min.js"></script>
 <script src="js/lib/jquery.mousewheel.min.js"></script>
 <script src="js/lib/json2/json2.js"></script>
-<script src="js/core/core.js?v=1.0.18"></script>
+<script src="js/core/core.js?v=1.0.16"></script>
