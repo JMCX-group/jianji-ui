@@ -35,6 +35,7 @@
         }
         .page-tag{
             background-color: rgba(168,193,246,0.1);
+            overflow: hidden;
         }
         .page-tag img{
             position: absolute;
@@ -108,7 +109,7 @@
                     "height":80
                 }'><img src="img/temp/psy_result/user_head/owl.png" class="cf-img-bkg"></div>
         </div>
-        <div class="cf-row page-recommend-tag" data-cf-layout='{
+        <div class="cf-row" id="page-tag-panel" data-cf-layout='{
                 "paddingLeft":126,
                 "paddingRight":70,
                 "lineHeight":30,
@@ -126,31 +127,31 @@
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>体贴<img src="img/temp/psy_result/icon/tag_close.png" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
+                }'>体贴<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>聪明<img src="img/temp/psy_result/icon/tag_close.png" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
+                }'>聪明<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>善于分析<img src="img/temp/psy_result/icon/tag_close.png" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
+                }'>善于分析<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>独行侠<img src="img/temp/psy_result/icon/tag_close.png" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
+                }'>独行侠<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>有才能<img src="img/temp/psy_result/icon/tag_close.png" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
+                }'>有才能<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
         </div>
         <div class="cf-row page-tag-input-panel" data-cf-layout='{
                 "paddingLeft":200,
@@ -172,7 +173,8 @@
 <script>
     function page_init(){
         g_jq_dom = $.extend({}, g_jq_dom, {
-            $main_page:$("#page-main-panel")
+            $main_page:$("#page-main-panel"),
+            $tag_panel:$("#page-tag-panel")
         });
 
         g_jq_dom.$main_page.css({
@@ -180,8 +182,26 @@
         });
     }
 
+    function remove_tag(){
+
+    }
+
+    function bind_event(){
+        g_jq_dom.$body.on(g_event.touchend, '.page-opt-remove-tag', function(){
+            var $tag = $(this).parent();
+            var tag_height = $tag.innerHeight();
+            $tag.animate({width:0, height:tag_height,opacity:0}, 400,function(){
+                $(this).remove();
+                var $all_tag = g_jq_dom.$tag_panel.find('.page-tag');
+                if($all_tag.length === 0){
+                    g_jq_dom.$tag_panel.css({"paddingBottom":50*g_var.scale_ratio});
+                }
+            });
+        });
+    }
     $(function(){
         page_init();
+        bind_event();
     });
 </script>
 </body>
