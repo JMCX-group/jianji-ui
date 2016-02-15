@@ -127,31 +127,31 @@
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>体贴<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
+                }'>体贴<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>聪明<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
+                }'>聪明<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>善于分析<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
+                }'>善于分析<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>独行侠<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
+                }'>独行侠<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>有才能<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2}'></div>
+                }'>有才能<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
         </div>
         <div class="cf-row page-tag-input-panel" data-cf-layout='{
                 "paddingLeft":200,
