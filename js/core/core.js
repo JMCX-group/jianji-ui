@@ -32,7 +32,8 @@ var g_event = {
     touchstart:"touchstart mousedown",
     keypress:"keypress",
     keydown:"keydown",
-    keyup:"keyup"
+    keyup:"keyup",
+    blur:"blur"
 };
 
 function page_overflow_dash_layout($el){

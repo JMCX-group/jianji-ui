@@ -194,16 +194,24 @@
         });
     }
 
-    function filter_tag_input(){}
+    function filter_tag_input(e){
+        if(32 == e.keyCode){
+            return false;
+        }
+    }
 
-    function add_tag(){
-        $this
+    function add_tag(e){
+        alert(e);
+        if(13 == e.keyCode){
+            alert(e.keyCode);
+        }
     }
 
     function bind_event(){
         g_jq_dom.$body.on(g_event.touchend, '.page-opt-remove-tag', remove_tag);
-        g_jq_dom.$body.on(g_event.keydown, '.page-tag-input-control input', add_tag);
+        g_jq_dom.$body.on(g_event.keydown, '.page-tag-input-control input', filter_tag_input);
         g_jq_dom.$body.on(g_event.keypress, '.page-tag-input-control input', add_tag);
+        g_jq_dom.$body.on('blur', '.page-tag-input-control input', add_tag);
     }
     $(function(){
         page_init();
