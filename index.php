@@ -213,7 +213,7 @@
         </div>
     </div>
 
-    <div class="cf-row page-blog-list">
+    <div class="cf-row" id="page-blog-list">
     <!--    begin: text demo -->
         <div class="cf-row page-blog-entry" data-cf-layout='{
                 "paddingLeft":20,
@@ -579,7 +579,7 @@
                 "paddingBottom":20,
                 "backgroundColor":"rgb(64,64,74)"
             }'>
-            <textarea placeholder="添加文字" data-cf-layout='{
+            <textarea placeholder="添加文字" id="page-article-text" data-cf-layout='{
                     "boxSizing":"border-box",
                     "backgroundColor":"rgb(64,64,74)",
                     "width":540,
@@ -714,19 +714,19 @@
             "fontSize":0,
             "paddingRight":50
         }'>
-        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-text">
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="text">
             <img src="img/temp/pre_publish/text.png" data-cf-layout='{"width":110}'>
             <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>文章</span>
         </div>
-        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-photo">
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="photo">
             <img src="img/temp/pre_publish/photo.png" data-cf-layout='{"width":110}'>
             <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>图片</span>
         </div>
-        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-video">
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="video">
             <img src="img/temp/pre_publish/video.png" data-cf-layout='{"width":110}'>
             <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>视频</span>
         </div>
-        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-audio">
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="audio">
             <img src="img/temp/pre_publish/audio.png" data-cf-layout='{"width":110}'>
             <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>语音</span>
         </div>
@@ -753,10 +753,10 @@
     <div class="cf-col-x cf-text-center" data-cf-layout='{
                 "width":460
             }'>
-        <div class="cf-row page-operation-write" data-cf-layout='{
+        <div class="cf-row" data-cf-layout='{
                     "fontSize":0,
                     "paddingBottom":6
-                }'><img src="img/temp/skin_dark/write_blog.png" data-cf-layout='{"width":34}'></div>
+                }'><img src="img/temp/skin_dark/write_blog.png" class="page-operation-write" data-cf-layout='{"width":34}'></div>
         <div class="cf-row page-operation-write">记录</div>
     </div>
     <div class="cf-col-x" data-cf-layout='{
@@ -788,6 +788,56 @@
         "width":640
     }'>发布</div>
 
+
+<div class="cf-row page-blog-entry" id="page-template-blog-entry" data-cf-layout='{
+                "paddingLeft":20,
+                "paddingBottom":10
+            }'>
+    <div class="cf-row page-the-line" data-cf-layout='{
+                    "left":51,
+                    "top":62
+                }'></div>
+    <div class="cf-col-x cf-text-center page-type-node" data-cf-layout='{
+                    "width":62,
+                    "marginRight":28,
+                    "border":{
+                        "width":3,
+                        "style":"solid",
+                        "color":"rgba(255,255,255,0.4)"
+                    },
+                    "borderRadius":"50%",
+                    "backgroundColor":"rgba(255,255,255,0.2)",
+                    "height":62,
+                    "lineHeight":68
+                }'><img src="img/temp/skin_light/type_photo.png"></div>
+    <div class="cf-col-x page-content-panel" data-cf-layout='{
+                "width":530,
+                "paddingTop":18
+            }'>
+        <div class="cf-row page-text-panel" data-cf-layout='{
+                        "fontSize":24,
+                        "lineHeight":28,
+                        "paddingRight":32,
+                        "color":"#e2e2e2"
+                    }'></div>
+        <div class="cf-row page-img-panel" data-cf-layout='{
+                        "paddingTop":20
+                    }'></div>
+        <div class="cf-row page-blog-publish-time" data-cf-layout='{
+                        "fontSize":20,
+                        "color":"#676767",
+                        "paddingTop":14,
+                        "paddingBottom":20
+                    }'>刚刚</div>
+    </div>
+</div>
+
+<div class="cf-col-x" id="page-template-blog-entry-img" data-cf-layout='{
+                            "width":156,
+                            "height":156,
+                            "overflow":"hidden",
+                            "marginRight":10
+                        }'><img src=""></div>
 <?php require_once(dirname(__FILE__).'/page_parts/common/js.php');?>
 <script src="js/lib/jquery.exif.js"></script>
 <script src="js/lib/MegaPixImage.js"></script>
@@ -798,12 +848,14 @@
 
     function page_init(){
         g_jq_dom = $.extend({}, g_jq_dom, {
+            $blog_list:$("#page-blog-list"),
             $img_temp:$("#page-img-template"),
             $img_list:$("#page-img-list"),
             $add_img_btn:$("#page-add-img-btn"),
             $add_img_tip:$("#page-img-add-tip"),
             $img_slide_left:$("#page-slide-left"),
             $img_slide_right:$("#page-slide-right"),
+            $article_text:$("#page-article-text"),
             $main_page:{
                 $panel:$("#page-main-panel"),
                 $footer:$("#page-main-footer")
@@ -829,12 +881,18 @@
                 $text:$("#page-feeling-text"),
                 $line:$("#page-feeling-line"),
                 $btn:$("#page-feeling-btn")
-            }
+            },
+            $blog_entry_temp:$("#page-template-blog-entry").remove().removeAttr("id"),
+            $blog_entry_temp_img:$("#page-template-blog-entry-img").remove().removeAttr("id")
         });
 
-        g_var = $.extend({}, g_var, {cur_feeling_pos:0,cur_feeling_min:0,cur_feeling_max:388});
+        g_var = $.extend({}, g_var, {cur_feeling_pos:0,cur_feeling_min:0,cur_feeling_max:388,publish_status:false,publish_type:'photo'});
     }
 
+    function scene_reset_to_main(){
+        g_jq_dom.$publish_page.$panel.fadeOut(200);
+        g_jq_dom.$publish_page.$footer.fadeOut(200, function(){g_jq_dom.$main_page.$panel.show();});
+    }
     function scene_swap_to_pre_publish(){
         g_jq_dom.$main_page.$panel.show();
 
@@ -850,6 +908,8 @@
     }
 
     function scene_swap_to_publish(){
+        var $this = $(this);
+        g_var.publish_type = $this.attr('data-publish-type');
         g_jq_dom.$publish_page.$panel.show().stop().fadeIn(200);
         g_jq_dom.$publish_page.$footer.show().stop().fadeIn(200);
 
@@ -860,7 +920,9 @@
 
     }
     function refresh_page(){
-        location.reload();
+        g_jq_dom.$img_list.children().remove();
+        g_jq_dom.$article_text.val('');
+        scene_reset_to_main();
     }
     function img_prev(){
         var $current_shown_img = g_jq_dom.$img_list.find(".page-shown-img");
@@ -915,6 +977,44 @@
             g_jq_dom.$feeling.$text.find("span").text(feel_str);
         });
     }
+    function publish_article(){
+        if(g_var.publish_status) {return;}
+        g_var.publish_status = true;
+        var $all_img = g_jq_dom.$img_list.find("img");
+        var article_str = g_jq_dom.$article_text.val();
+        var img_count = $all_img.length;
+        article_str = article_str.trim();
+
+        if(''==article_str && 0 == img_count){
+            alert("请至少选择一张图片或写下一段文字.");
+            g_var.publish_status = false;
+            return;
+        }
+
+
+        var $new_blog_entry = g_jq_dom.$blog_entry_temp.clone();
+        $new_blog_entry.find('.page-type-node').find('img').attr('src', 'img/temp/skin_light/type_'+g_var.publish_type+'.png');
+        if('' == article_str){
+            $new_blog_entry.find('.page-text-panel').remove();
+        } else {
+            $new_blog_entry.find('.page-text-panel').text(article_str);
+        }
+
+        $all_img.each(function(){
+            var $this = $(this);
+            var $new_img = g_jq_dom.$blog_entry_temp_img.clone();
+            $new_img.find("img").attr('src', $this.attr('src'));
+            $new_img.appendTo($new_blog_entry.find('.page-img-panel'));
+        });
+
+        $new_blog_entry.prependTo(g_jq_dom.$blog_list);
+        scene_reset_to_main();
+        g_var.publish_status = false;
+
+        g_jq_dom.$img_list.children().remove();
+        g_jq_dom.$article_text.val('');
+
+    }
     function page_event_bind(){
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
@@ -923,6 +1023,7 @@
         g_jq_dom.$add_img_btn.on(g_event.touchend, start_shooting);
         g_jq_dom.$img_slide_left.on(g_event.touchend, img_prev);
         g_jq_dom.$img_slide_right.on(g_event.touchend, img_next);
+        g_jq_dom.$publish_page.$footer.on(g_event.touchend, publish_article);
 
         slide_feeling();
     }
@@ -956,6 +1057,7 @@
         if(0 === current_img_count){
             g_jq_dom.$img_list.hide();
             g_jq_dom.$add_img_tip.show();
+            g_jq_dom.$add_img_btn.show();
         } else {
             g_jq_dom.$img_list.show();
             g_jq_dom.$add_img_tip.hide();
