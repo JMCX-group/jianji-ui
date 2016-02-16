@@ -29,7 +29,8 @@ var g_event = {
     css_ani_event:"webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend",
     touchend:"touchend click",
     touchmove:"touchmove mousewheel",
-    touchstart:"touchstart mousedown"
+    touchstart:"touchstart mousedown",
+    keypress:"keypress"
 };
 
 function page_overflow_dash_layout($el){

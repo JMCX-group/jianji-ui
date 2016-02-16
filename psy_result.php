@@ -183,21 +183,22 @@
     }
 
     function remove_tag(){
-
+        var $tag = $(this).parent();
+        var tag_height = $tag.innerHeight();
+        $tag.animate({width:0, height:tag_height,opacity:0}, 400,function(){
+            $(this).remove();
+            var $all_tag = g_jq_dom.$tag_panel.find('.page-tag');
+            if($all_tag.length === 0){
+                g_jq_dom.$tag_panel.css({"paddingBottom":50*g_var.scale_ratio});
+            }
+        });
     }
 
+    function add_tag(){}
+
     function bind_event(){
-        g_jq_dom.$body.on(g_event.touchend, '.page-opt-remove-tag', function(){
-            var $tag = $(this).parent();
-            var tag_height = $tag.innerHeight();
-            $tag.animate({width:0, height:tag_height,opacity:0}, 400,function(){
-                $(this).remove();
-                var $all_tag = g_jq_dom.$tag_panel.find('.page-tag');
-                if($all_tag.length === 0){
-                    g_jq_dom.$tag_panel.css({"paddingBottom":50*g_var.scale_ratio});
-                }
-            });
-        });
+        g_jq_dom.$body.on(g_event.touchend, '.page-opt-remove-tag', remove_tag);
+        g_jq_dom.$body.on(g_event.touchend, '.page-opt-remove-tag', add_tag);
     }
     $(function(){
         page_init();
