@@ -194,11 +194,16 @@
         });
     }
 
-    function add_tag(){}
+    function filter_tag_input(){}
+
+    function add_tag(){
+        $this
+    }
 
     function bind_event(){
         g_jq_dom.$body.on(g_event.touchend, '.page-opt-remove-tag', remove_tag);
-        g_jq_dom.$body.on(g_event.touchend, '.page-opt-remove-tag', add_tag);
+        g_jq_dom.$body.on(g_event.keydown, '.page-tag-input-control input', add_tag);
+        g_jq_dom.$body.on(g_event.keypress, '.page-tag-input-control input', add_tag);
     }
     $(function(){
         page_init();
