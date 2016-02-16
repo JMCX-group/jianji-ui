@@ -58,6 +58,9 @@
         .page-tag-input-control{
             border-bottom: 1px solid rgba(163, 198, 246, 0.1);
         }
+        #page-template-tag{
+            display: none;
+        }
     </style>
 </head>
 <body class="cf-invisible">
@@ -127,31 +130,31 @@
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>体贴<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
+                }'><span>体贴</span><img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>聪明<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
+                }'><span>聪明</span><img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>善于分析<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
+                }'><span>善于分析</span><img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>独行侠<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
+                }'><span>独行侠</span><img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
             <div class="cf-col-x page-tag" data-cf-layout='{
                     "paddingLeft":16,
                     "paddingRight":16,
                     "marginBottom":20,
                     "marginLeft":20
-                }'>有才能<img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
+                }'><span>有才能</span><img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
         </div>
         <div class="cf-row page-tag-input-panel" data-cf-layout='{
                 "paddingLeft":200,
@@ -168,13 +171,21 @@
         </div>
     </div>
 
+    <div class="cf-col-x page-tag" id="page-template-tag" data-cf-layout='{
+                    "paddingLeft":16,
+                    "paddingRight":16,
+                    "marginBottom":20,
+                    "marginLeft":20
+                }'><span></span><img src="img/temp/psy_result/icon/tag_close.png" class="page-opt-remove-tag" data-cf-layout='{"width":7,"right":2,"top":2,"paddingBottom":20,"paddingLeft":16}'></div>
+
 <?php require_once(dirname(__FILE__).'/page_parts/common/js.php');?>
 
 <script>
     function page_init(){
         g_jq_dom = $.extend({}, g_jq_dom, {
             $main_page:$("#page-main-panel"),
-            $tag_panel:$("#page-tag-panel")
+            $tag_panel:$("#page-tag-panel"),
+            $temp_tag:$("#page-template-tag").removeAttr('id').remove()
         });
 
         g_jq_dom.$main_page.css({
@@ -194,24 +205,42 @@
         });
     }
 
+    function check_tag_text(str){
+        return ('' === str.trim());
+    }
     function filter_tag_input(e){
         if(32 == e.keyCode){
             return false;
         }
     }
 
-    function add_tag(e){
-        alert(e);
+    function add_tag($input){
+        var tag_text = $input.val();
+        if(check_tag_text(tag_text)){$input.val('');return;}
+        var $new_tag = g_jq_dom.$temp_tag.clone();
+        $new_tag.find('span').text(tag_text);
+        $new_tag.appendTo(g_jq_dom.$tag_panel);
+        $input.val('');
+    }
+
+    function input_enter(e){
+        var $this = $(this);
         if(13 == e.keyCode){
-            alert(e.keyCode);
+            add_tag($this);
+            $this.blur();
+
         }
+    }
+
+    function input_blur(){
+        add_tag($(this));
     }
 
     function bind_event(){
         g_jq_dom.$body.on(g_event.touchend, '.page-opt-remove-tag', remove_tag);
         g_jq_dom.$body.on(g_event.keydown, '.page-tag-input-control input', filter_tag_input);
-        g_jq_dom.$body.on(g_event.keypress, '.page-tag-input-control input', add_tag);
-        g_jq_dom.$body.on('blur', '.page-tag-input-control input', add_tag);
+        g_jq_dom.$body.on(g_event.keypress, '.page-tag-input-control input', input_enter);
+        g_jq_dom.$body.on(g_event.blur, '.page-tag-input-control input', input_blur);
     }
     $(function(){
         page_init();
