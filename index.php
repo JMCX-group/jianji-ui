@@ -469,19 +469,19 @@
             "fontSize":0,
             "paddingRight":50
         }'>
-        <div class="cf-col-3x" id="page-publish-text">
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-text">
             <img src="img/temp/pre_publish/text.png" data-cf-layout='{"width":110}'>
             <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>文章</span>
         </div>
-        <div class="cf-col-3x" id="page-publish-photo">
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-photo">
             <img src="img/temp/pre_publish/photo.png" data-cf-layout='{"width":110}'>
             <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>图片</span>
         </div>
-        <div class="cf-col-3x" id="page-publish-video">
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-video">
             <img src="img/temp/pre_publish/video.png" data-cf-layout='{"width":110}'>
             <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>视频</span>
         </div>
-        <div class="cf-col-3x" id="page-publish-audio">
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-audio">
             <img src="img/temp/pre_publish/audio.png" data-cf-layout='{"width":110}'>
             <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>语音</span>
         </div>
@@ -747,10 +747,7 @@
                 $panel:$("#page-pre-publish-panel"),
                 $footer:$("#page-pre-publish-footer"),
                 $buttons:{
-                    $publish_text:$("#page-publish-text"),
-                    $publish_photo:$("#page-publish-photo"),
-                    $publish_video:$("#page-publish-video"),
-                    $publish_audio:$("#page-publish-audio"),
+                    $type_btn:$(".page-publish-type-btn"),
                     $close_btn:$("#page-pre-publish-close")
                 }
             },
@@ -778,12 +775,18 @@
     }
 
     function scene_swap_to_publish(){
+        g_jq_dom.$publish_page.$panel.stop().fadeIn(200);
+        g_jq_dom.$publish_page.$footer.stop().fadeIn(200);
+
+        g_jq_dom.$pre_publish_page.$footer.fadeOut(200);
+        g_jq_dom.$pre_publish_page.fadeOut(200);
 
     }
 
     function page_event_bind(){
-        g_jq_dom.$page_opt.$write.on("touchend", scene_swap_to_pre_publish);
-        g_jq_dom.$pre_publish_page.$buttons.$close_btn.on("touchend", scene_swap_to_main);
+        g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
+        g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
+        g_jq_dom.$buttons.$type_btn.on(g_event.touchend, scene_swap_to_publish);
     }
 
     $(function(){
