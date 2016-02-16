@@ -54,6 +54,9 @@
         .page-blog-entry:last-child .page-content-panel{
             border-bottom: 0;
         }
+        .pag-img-slide-panel{
+            position: absolute;
+        }
 
         #page-main-footer,
         #page-pre-publish-footer,
@@ -97,6 +100,12 @@
             top:0;
             display: none;
             background-color: rgba(37,37,37,0.95);
+        }
+
+        #page-img-list{
+            position: absolute;
+            overflow: hidden;
+            background-color: rgb(38,39,53);
         }
 
         /*begin: debug*/
@@ -145,7 +154,7 @@
                 "width":170
             }'>
     </div>
-    <div class="cf-row" id="page-curve" data-cf-layout='{"height":80}'></div>
+    <div class="cf-row" id="page-curve" data-cf-layout='{"height":80}'><img src="img/temp/demo_curve.png" class="cf-img-bkg"></div>
     <div class="cf-row cf-text-center" id="page-calendar" data-cf-layout='{
             "paddingTop":22,
             "paddingLeft":20,
@@ -440,7 +449,7 @@
                                 }'>
                         <div class="cf-col-x" data-cf-layout='{
                                 "float":"right"
-                            }'>56s</div>
+                                }'>56s</div>
                     </div>
                     <div class="cf-col-x"><img src="img/temp/skin_dark/audio_entry_right.png" data-cf-layout='{"width":10,"height":40}'></div>
                 </div>
@@ -457,45 +466,13 @@
 </div>
 <!-- end: 主界面 -->
 
-<div class="cf-row" id="page-blur-mask"></div>
-
-<!-- begin: 预发布界面 -->
-<div class="cf-wrap" id="page-pre-publish-panel" data-cf-layout='{
-        "marginLeft":-320
-    }'>
-    <div class="cf-row" id="page-pre-publish-type-panel" data-cf-layout='{
-            "height":220,
-            "paddingLeft":50,
-            "fontSize":0,
-            "paddingRight":50
-        }'>
-        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-text">
-            <img src="img/temp/pre_publish/text.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>文章</span>
-        </div>
-        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-photo">
-            <img src="img/temp/pre_publish/photo.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>图片</span>
-        </div>
-        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-video">
-            <img src="img/temp/pre_publish/video.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>视频</span>
-        </div>
-        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-audio">
-            <img src="img/temp/pre_publish/audio.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>语音</span>
-        </div>
-    </div>
-</div>
-<!-- end: 预发布界面 -->
-
 <!-- begin: 发布界面 -->
 <div class="cf-wrap" id="page-publish-panel" data-cf-layout='{"paddingBottom":124}'>
     <img src="img/temp/publish/bkg.png" class="cf-img-bkg">
     <div class="cf-row" id="page-publish-top"
          data-cf-layout='{
-                "paddingTop":68,
-                "paddingBottom":30
+                "paddingTop":28,
+                "paddingBottom":28
             }'>
         <div class="cf-row" data-cf-layout='{
                 "height":30,
@@ -526,7 +503,7 @@
     </div>
 
     <div class="cf-row" data-cf-layout='{
-            "paddingTop":40,
+            "paddingTop":80,
             "width":540,
             "marginLeft":50,
             "marginRight":50
@@ -536,11 +513,36 @@
                 "lineHeight":28
             }'>
             <div class="cf-row" data-cf-layout='{
-                    "width":140,
                     "fontSize":28,
                     "height":28,
                     "color":"rgb(255,255,255)"
                 }'>情绪能量</div>
+        </div>
+        <div class="cf-col-x" data-cf-layout='{
+                "width":400,
+                "height":26,
+                "marginLeft":12
+            }'>
+            <img src="img/temp/publish/line_bkg.png" class="cf-img-bkg">
+            <div class="cf-row" id="page-feeling-line" data-cf-layout='{
+                    "width":10,
+                    "overflow":"hidden",
+                    "height":26,
+                    "lineHeight":26,
+                    "paddingLeft":8
+                }'><img src="img/temp/publish/line_front.png" data-cf-layout='{"width":388,"left":8,"top":11}' class="cf-img-bkg"></div>
+            <img src="img/temp/publish/drag_btn.png" id="page-feeling-btn" class="cf-img-bkg" data-cf-layout='{"width":32,"marginTop":-2}'>
+            <div class="cf-row" id="page-feeling-text" data-cf-layout='{
+                    "position":"absolute",
+                    "width":72,
+                    "height":52,
+                    "fontSize":20,
+                    "lineHeight":44,
+                    "marginTop":-52,
+                    "marginLeft":-20,
+                    "color":"#fff",
+                    "textAlign":"center"
+                }'><img class="cf-img-bkg" src="img/temp/publish/feeling_text_bkg.png"><span>忧郁</span></div>
         </div>
     </div>
 
@@ -551,8 +553,9 @@
             "fontSize":0,
             "width":540
         }'>
-        <img src="img/temp/publish/add_img_bkg.jpg" data-cf-layout='{"width":540,"left":0,"top":20}' class="cf-img-bkg">
-        <div class="cf-row" data-cf-layout='{
+        <img src="img/temp/publish/add_img_bkg.jpg" data-cf-layout='{"width":540,"left":0,"top":20}' id="page-img-template" class="cf-img-bkg">
+        <div class="cf-row cf-text-center" id="page-img-list" data-cf-layout='{"width":540,"height":300,"left":0,"top":20}'></div>
+        <div class="cf-row" id="page-img-add-tip" data-cf-layout='{
                 "position":"absolute",
                 "left":20,
                 "top":40,
@@ -564,8 +567,9 @@
         <div class="cf-row" data-cf-layout='{
                 "paddingTop":94,
                 "position":"absolute",
-                "textAlign":"center"
-            }'><img src="img/temp/publish/add_img_btn.png" data-cf-layout='{
+                "textAlign":"center",
+                "z-index":1
+            }'><img id="page-add-img-btn" src="img/temp/publish/add_img_btn.png" data-cf-layout='{
                     "width":112
                 }'>
         </div>
@@ -591,6 +595,26 @@
                 }'></textarea>
         </div>
     </div>
+
+    <div class="cf-row" id="page-slide-left" data-cf-layout='{
+            "position":"absolute",
+            "left":0,
+            "top":300,
+            "height":60,
+            "width":77,
+            "paddingLeft":17,
+            "display":"none"
+        }'><img src="img/temp/publish/arrow_left.png" data-cf-layout='{"width":60}'></div>
+    <div class="cf-row cf-text-right" id="page-slide-right" data-cf-layout='{
+            "position":"absolute",
+            "right":0,
+            "top":300,
+            "height":60,
+            "width":77,
+            "paddingRight":17,
+            "display":"none"
+        }'><img src="img/temp/publish/arrow_right.png" data-cf-layout='{"width":60}'></div>
+
 
     <div class="cf-row" id="page-edit-ext-info" data-cf-layout='{
             "width":550,
@@ -678,6 +702,38 @@
 </div>
 <!-- end: 发布界面 -->
 
+<div class="cf-row" id="page-blur-mask"></div>
+
+<!-- begin: 预发布界面 -->
+<div class="cf-wrap" id="page-pre-publish-panel" data-cf-layout='{
+        "marginLeft":-320
+    }'>
+    <div class="cf-row" id="page-pre-publish-type-panel" data-cf-layout='{
+            "height":220,
+            "paddingLeft":50,
+            "fontSize":0,
+            "paddingRight":50
+        }'>
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-text">
+            <img src="img/temp/pre_publish/text.png" data-cf-layout='{"width":110}'>
+            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>文章</span>
+        </div>
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-photo">
+            <img src="img/temp/pre_publish/photo.png" data-cf-layout='{"width":110}'>
+            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>图片</span>
+        </div>
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-video">
+            <img src="img/temp/pre_publish/video.png" data-cf-layout='{"width":110}'>
+            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>视频</span>
+        </div>
+        <div class="cf-col-3x page-publish-type-btn" data-publish-type="page-publish-audio">
+            <img src="img/temp/pre_publish/audio.png" data-cf-layout='{"width":110}'>
+            <span class="cf-row" data-cf-layout='{"fontSize":28,"paddingTop":22}'>语音</span>
+        </div>
+    </div>
+</div>
+<!-- end: 预发布界面 -->
+
 <div class="cf-row" id="page-main-footer" data-cf-layout='{
             "height":98,
             "paddingTop":22,
@@ -733,12 +789,21 @@
     }'>发布</div>
 
 <?php require_once(dirname(__FILE__).'/page_parts/common/js.php');?>
+<script src="js/lib/jquery.exif.js"></script>
+<script src="js/lib/MegaPixImage.js"></script>
+<script src="js/lib/common.js"></script>
 <!--1.0.18-->
 <script src="js/page/index.js?v=0.0.1"></script>
 <script>
 
     function page_init(){
         g_jq_dom = $.extend({}, g_jq_dom, {
+            $img_temp:$("#page-img-template"),
+            $img_list:$("#page-img-list"),
+            $add_img_btn:$("#page-add-img-btn"),
+            $add_img_tip:$("#page-img-add-tip"),
+            $img_slide_left:$("#page-slide-left"),
+            $img_slide_right:$("#page-slide-right"),
             $main_page:{
                 $panel:$("#page-main-panel"),
                 $footer:$("#page-main-footer")
@@ -757,12 +822,22 @@
             },
             $page_mask:$("#page-blur-mask"),
             $page_opt:{
+                $back_to_main:$(".page-go-back-to-index"),
                 $write:$(".page-operation-write")
+            },
+            $feeling:{
+                $text:$("#page-feeling-text"),
+                $line:$("#page-feeling-line"),
+                $btn:$("#page-feeling-btn")
             }
         });
+
+        g_var = $.extend({}, g_var, {cur_feeling_pos:0,cur_feeling_min:0,cur_feeling_max:388});
     }
 
     function scene_swap_to_pre_publish(){
+        g_jq_dom.$main_page.$panel.show();
+
         g_jq_dom.$page_mask.stop().fadeIn(200);
         g_jq_dom.$pre_publish_page.$panel.show().removeClass("animated fadeOutDown").addClass("animated fadeInUp");
         g_jq_dom.$pre_publish_page.$footer.fadeIn(200);
@@ -775,18 +850,211 @@
     }
 
     function scene_swap_to_publish(){
-        g_jq_dom.$publish_page.$panel.stop().fadeIn(200);
-        g_jq_dom.$publish_page.$footer.stop().fadeIn(200);
+        g_jq_dom.$publish_page.$panel.show().stop().fadeIn(200);
+        g_jq_dom.$publish_page.$footer.show().stop().fadeIn(200);
 
+        g_jq_dom.$main_page.$panel.hide();
+        g_jq_dom.$page_mask.stop().fadeOut(200);
+        g_jq_dom.$pre_publish_page.$panel.removeClass("animated fadeInUp").addClass("animated fadeOutDown");
         g_jq_dom.$pre_publish_page.$footer.fadeOut(200);
-        g_jq_dom.$pre_publish_page.fadeOut(200);
 
     }
+    function refresh_page(){
+        location.reload();
+    }
+    function img_prev(){
+        var $current_shown_img = g_jq_dom.$img_list.find(".page-shown-img");
+        if(0 == $current_shown_img.length){
+            g_jq_dom.$img_list.children().last().show().addClass("page-shown-img");
+            return;
+        }
 
+        var $prev_img = $current_shown_img.prev();
+
+        if(0 !== $prev_img.length){
+            $current_shown_img.hide().removeClass("page-shown-img");
+            $prev_img.show().addClass("page-shown-img");
+        }
+    }
+    function img_next(){
+        var $current_shown_img = g_jq_dom.$img_list.find(".page-shown-img");
+
+        $current_shown_img.hide().removeClass("page-shown-img");
+        var $next_img = $current_shown_img.next();
+        if(0 !== $next_img){
+            $next_img.show().addClass("page-shown-img");
+        }
+    }
+
+    function slide_feeling(){
+        var v_start_x, start_x;
+        g_jq_dom.$feeling.$btn.on(g_event.touchstart, function(e){
+            v_start_x =g_jq_dom.$feeling.$btn.position();
+            start_x = e.originalEvent.touches[0].clientX;
+        });
+        g_jq_dom.$feeling.$btn.on(g_event.touchmove, function(e){
+            var current_x = e.originalEvent.touches[0].clientX;
+            var current_left = v_start_x.left + current_x-start_x;
+            var max_len = 369*g_var.scale_ratio;
+            if(0 >= current_left){current_left = 0;}
+            if(max_len <= current_left){current_left = max_len;}
+            g_jq_dom.$feeling.$btn.css({left:current_left});
+            g_jq_dom.$feeling.$line.css({width:current_left+10*g_var.scale_ratio});
+            g_jq_dom.$feeling.$text.css({left:current_left});
+
+            var sad = max_len / 3;
+            var pice = max_len * 2 / 3;
+            var feel_str = '';
+            if(current_left < sad / 3){
+                feel_str = "忧郁";
+            } else if(current_left < pice){
+                feel_str = "平静";
+            } else {
+                feel_str = "兴奋";
+            }
+            g_jq_dom.$feeling.$text.find("span").text(feel_str);
+        });
+    }
     function page_event_bind(){
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
-        g_jq_dom.$buttons.$type_btn.on(g_event.touchend, scene_swap_to_publish);
+        g_jq_dom.$pre_publish_page.$buttons.$type_btn.on(g_event.touchend, scene_swap_to_publish);
+        g_jq_dom.$page_opt.$back_to_main.on(g_event.touchend, refresh_page);
+        g_jq_dom.$add_img_btn.on(g_event.touchend, start_shooting);
+        g_jq_dom.$img_slide_left.on(g_event.touchend, img_prev);
+        g_jq_dom.$img_slide_right.on(g_event.touchend, img_next);
+
+        slide_feeling();
+    }
+
+    function start_shooting(){
+        var $new_img = $('<div class="cf-row page-shown-img" style="height:100%"><img><div>');
+        var $img_el = $new_img.find('img');
+        camera_plus.start_camera({
+            show_panel:$img_el,
+            callback:function(){
+                g_jq_dom.$img_list.children().hide().removeClass("page-shown-img");
+                $new_img.appendTo(g_jq_dom.$img_list);
+                resize_img($img_el);
+            }
+        });
+    }
+
+    function resize_img($img){
+        var panel_height = g_jq_dom.$img_list.height();
+        $img.removeAttr("style").css({"width":"auto", "height":"auto"});
+
+        $img.css({
+            width:'auto',
+            height:panel_height
+        }).show();
+    }
+
+    function img_show_timer(){
+        var current_img_count = g_jq_dom.$img_list.children().length;
+
+        if(0 === current_img_count){
+            g_jq_dom.$img_list.hide();
+            g_jq_dom.$add_img_tip.show();
+        } else {
+            g_jq_dom.$img_list.show();
+            g_jq_dom.$add_img_tip.hide();
+
+            var $current_shown_img = g_jq_dom.$img_list.find(".page-shown-img");
+
+            if(0 === $current_shown_img.length){
+                if(9 > current_img_count){
+                    g_jq_dom.$img_list.hide();
+                    g_jq_dom.$add_img_tip.show();
+                    g_jq_dom.$img_slide_left.show();
+                    g_jq_dom.$add_img_btn.show();
+
+                    g_jq_dom.$img_slide_left.show();
+                    g_jq_dom.$img_slide_right.hide();
+                }
+            } else {
+                g_jq_dom.$add_img_btn.hide();
+                var $prev_img = $current_shown_img.prev();
+                var $next_img = $current_shown_img.next();
+                var show_status = $prev_img.length + ":" + $next_img.length;
+                if("0:0" == show_status){
+                    g_jq_dom.$img_slide_left.hide();
+                    g_jq_dom.$img_slide_right.show();
+                } else if("0:1" == show_status){
+                    g_jq_dom.$img_slide_left.hide();
+                    g_jq_dom.$img_slide_right.show();
+                } else if("1:1" == show_status){
+                    g_jq_dom.$img_slide_left.show();
+                    g_jq_dom.$img_slide_right.show();
+                } else {
+                    g_jq_dom.$img_slide_left.show();
+                    if(9 > current_img_count){
+                        g_jq_dom.$img_slide_right.show();
+                    } else {
+                        g_jq_dom.$img_slide_right.hide();
+                    }
+                }
+            }
+        }
+    }
+
+    function init_timer(){
+        setInterval(img_show_timer, 100);
+    }
+
+    function init_calendar(){
+        var cur_date = new Date();
+        var full_year = cur_date.getFullYear();
+        var cur_month = cur_date.getMonth() + 1;
+        var month_day = cur_date.getDate();
+        var week_day = cur_date.getDate();
+
+
+        var day_in_month = [31,31,28,31,30,31,30,31,31,30,31,30,31];
+        var week_day_map = ["SUN", "MON", "TUE", "WEB", "THU", "FRI", "SAT"];
+
+        month_day = month_day - 3;
+        if(month_day < 0){
+            cur_month -= 1;
+            month_day = day_in_month[cur_month] + month_day;
+        }
+
+        week_day = (week_day - 3) % 7;
+
+        function is_leap_year(full_year){
+            if(!isNaN(parseInt(full_year))){
+                if((full_year%4==0 && full_year%100!=0)||(full_year%100==0 && full_year%400==0)){
+                    return true;
+                } else {
+                    return false
+                }
+            } else {
+                alert("请输入正确年份！");
+            }
+        }
+        if(is_leap_year(full_year)){
+            day_in_month[1] = 29;
+        }
+
+        var i = 0;
+        for(i=0; i<7; i++){
+            var $cale_cell = $("#page-day-"+(i+1));
+            var $month_day = $cale_cell.find(".page-en-month-day");
+            var $week_day = $cale_cell.find(".page-en-week-day");
+
+            if(month_day > day_in_month[cur_month]){
+                month_day = 1
+            }
+            if(month_day < 10){
+                $month_day.text("0"+month_day);
+            } else {
+                $month_day.text(month_day);
+            }
+            $week_day.text(week_day_map[week_day%7]);
+            month_day++;
+            week_day++;
+
+        }
     }
 
     $(function(){
@@ -796,6 +1064,10 @@
         $blur_mask.css({
             "height":g_var.wnd_height
         });
+
+        img_show_timer();
+        init_timer();
+        init_calendar();
 
     });
 </script>
