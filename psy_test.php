@@ -363,8 +363,7 @@
             alert("请做完本页面的所有项目选择。");
             return;
         }
-
-
+        location.href = 'psy_result.php'
     }
 
     function bind_event(){
@@ -375,7 +374,7 @@
 
         g_jq_dom.$body.on(g_event.touchend, '.page-opt-next-page',go_to_next);
         g_jq_dom.$body.on(g_event.touchend, '.page-answer-item',select_answer);
-        g_jq_dom.$body.on(g_event.touchend, '.page-opt-submit',select_answer);
+        g_jq_dom.$body.on(g_event.touchend, '.page-opt-submit',jump_to_result);
     }
 
     $(function(){

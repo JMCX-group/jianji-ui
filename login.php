@@ -215,8 +215,15 @@
 
 //        $("#page-login-btn").css({letterSpacing:"20px"});
     }
+
+    function bind_event(){
+        $("#page-login-btn").on(g_event.touchend, function(){
+            location.href = 'psy_test.php';
+        });
+    }
     $(function(){
         page_init();
+        bind_event();
     });
 </script>
 </body>

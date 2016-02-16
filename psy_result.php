@@ -61,6 +61,10 @@
         #page-template-tag{
             display: none;
         }
+        #page-goto-index{
+            text-align: center;
+            background-color: rgba(168,193,246,0.1);
+        }
     </style>
 </head>
 <body class="cf-invisible">
@@ -159,7 +163,8 @@
         <div class="cf-row page-tag-input-panel" data-cf-layout='{
                 "paddingLeft":200,
                 "lineHeight":44,
-                "fontSize":24
+                "fontSize":24,
+                "marginBottom":60
             }'>
             <div class="cf-col-x page-tag-input-title" data-cf-layout='{"left":70}'>添加标签：</div>
             <div class="cf-col-x page-tag-input-control" data-cf-layout='{
@@ -168,6 +173,17 @@
                 }'>
                 <input placeholder="" type="text" maxlength="10" data-cf-layout='{"fontSize":20}'>
             </div>
+        </div>
+
+        <div class="cf-row" data-cf-layout='{
+            "paddingLeft":70,
+            "paddingRight":70
+        }'>
+            <div class="cf-row" id="page-goto-index" data-cf-layout='{
+                "height":100,
+                "lineHeight":100,
+                "fontSize":44
+                }'>NEXT</div>
         </div>
     </div>
 
@@ -185,6 +201,7 @@
         g_jq_dom = $.extend({}, g_jq_dom, {
             $main_page:$("#page-main-panel"),
             $tag_panel:$("#page-tag-panel"),
+            $page_goto_index:$("#page-goto-index"),
             $temp_tag:$("#page-template-tag").removeAttr('id').remove()
         });
 
@@ -241,6 +258,10 @@
         g_jq_dom.$body.on(g_event.keydown, '.page-tag-input-control input', filter_tag_input);
         g_jq_dom.$body.on(g_event.keypress, '.page-tag-input-control input', input_enter);
         g_jq_dom.$body.on(g_event.blur, '.page-tag-input-control input', input_blur);
+
+        g_jq_dom.$page_goto_index.on(g_event.touchend, function(){
+            location.href = 'index.php';
+        })
     }
     $(function(){
         page_init();
