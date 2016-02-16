@@ -886,28 +886,38 @@
             $blog_entry_temp_img:$("#page-template-blog-entry-img").remove().removeAttr("id")
         });
 
-        g_var = $.extend({}, g_var, {cur_feeling_pos:0,cur_feeling_min:0,cur_feeling_max:388,publish_status:false,publish_type:'photo'});
+        g_var = $.extend({}, g_var, {
+            cur_feeling_pos:0,cur_feeling_min:0,cur_feeling_max:388,
+            pre_publish_status:false,
+            publish_status:false,publish_type:'photo'
+        });
     }
 
     function scene_reset_to_main(){
+        g_var.pre_publish_status = false;
         g_jq_dom.$publish_page.$panel.fadeOut(200);
-        g_jq_dom.$publish_page.$footer.fadeOut(200, function(){g_jq_dom.$main_page.$panel.show();});
+        g_jq_dom.$publish_page.$footer.fadeOut(200, function(){
+            g_jq_dom.$main_page.$panel.show();
+        });
     }
     function scene_swap_to_pre_publish(){
         g_jq_dom.$main_page.$panel.show();
 
         g_jq_dom.$page_mask.stop().fadeIn(200);
         g_jq_dom.$pre_publish_page.$panel.show().removeClass("animated fadeOutDown").addClass("animated fadeInUp");
-        g_jq_dom.$pre_publish_page.$footer.fadeIn(200);
+        g_jq_dom.$pre_publish_page.$footer.fadeIn(200, function(){g_var.pre_publish_status = true});
     }
 
     function scene_swap_to_main(){
+        g_var.pre_publish_status = false;
         g_jq_dom.$page_mask.stop().fadeOut(200);
         g_jq_dom.$pre_publish_page.$panel.removeClass("animated fadeInUp").addClass("animated fadeOutDown");
         g_jq_dom.$pre_publish_page.$footer.fadeOut(200);
     }
 
     function scene_swap_to_publish(){
+        if(!g_var.pre_publish_status){return;}
+        g_var.pre_publish_status = false;
         var $this = $(this);
         g_var.publish_type = $this.attr('data-publish-type');
         g_jq_dom.$publish_page.$panel.show().stop().fadeIn(200);
