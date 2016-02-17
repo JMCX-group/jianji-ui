@@ -54,8 +54,15 @@
         .page-blog-entry:last-child .page-content-panel{
             border-bottom: 0;
         }
-        .pag-img-slide-panel{
-            position: absolute;
+
+        .page-side-menu-inner{
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .page-menu-item{
+            border-bottom: 1px solid rgba(255,255,255,0.2);;
+        }
+        .page-menu-item img{
+            left:auto !important;
         }
 
         #page-main-footer,
@@ -107,11 +114,20 @@
             overflow: hidden;
             background-color: rgb(38,39,53);
         }
+        #page-side-menu{
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            color:#e2e2e2;
+            background-color: rgb(38,39,51);
+            box-shadow:-2px -1px 2px #1a1a1a;
+        }
+        #page-main-footer{
+            z-index: 1;
+        }
 
         /*begin: debug*/
-        #page-main-footer{
-            /*display: none;*/
-        }
         #page-publish-footer{
             display: none;
         }
@@ -765,8 +781,8 @@
         <div class="cf-row" data-cf-layout='{
                     "fontSize":0,
                     "paddingBottom":6
-                }'><img src="img/temp/skin_dark/personal_center.png" data-cf-layout='{"width":34}'></div>
-        <div class="cf-row">个人</div>
+                }'><img src="img/temp/skin_dark/personal_center.png" class="page-operation-show-menu" data-cf-layout='{"width":34}'></div>
+        <div class="cf-row page-operation-show-menu">个人</div>
     </div>
 </div>
 
@@ -838,6 +854,122 @@
                             "overflow":"hidden",
                             "marginRight":10
                         }'><img src=""></div>
+
+<div class="cf-row" id="page-side-menu" data-cf-layout='{
+        "paddingLeft":55,
+        "paddingRight":55,
+        "width":540
+    }'>
+    <div class="cf-row page-side-menu-inner">
+        <div class="cf-row page-menu-item" data-cf-layout='{
+                "paddingLeft":10,
+                "paddingRight":10,
+                "paddingTop":34,
+                "paddingBottom":20,
+                "fontSize":26
+            }'>会员中心<img src="img/temp/skin_dark/ico_menu.png" class="cf-img-bkg" data-cf-layout='{
+                    "width":8,
+                    "right":10,
+                    "top":40
+                }'></div>
+
+        <div class="cf-row page-menu-item" data-cf-layout='{
+                "paddingLeft":10,
+                "paddingRight":10,
+                "paddingTop":34,
+                "paddingBottom":20,
+                "fontSize":26
+            }'>档案室<img src="img/temp/skin_dark/ico_menu.png" class="cf-img-bkg" data-cf-layout='{
+                    "width":8,
+                    "right":10,
+                    "top":40
+                }'></div>
+
+        <div class="cf-row page-menu-item" data-cf-layout='{
+                "paddingLeft":10,
+                "paddingRight":10,
+                "paddingTop":34,
+                "paddingBottom":20,
+                "fontSize":26
+            }'>消息中心<img src="img/temp/skin_dark/ico_menu.png" class="cf-img-bkg" data-cf-layout='{
+                    "width":8,
+                    "right":10,
+                    "top":40
+                }'></div>
+
+        <div class="cf-row page-menu-item" data-cf-layout='{
+                "paddingLeft":10,
+                "paddingRight":10,
+                "paddingTop":34,
+                "paddingBottom":20,
+                "fontSize":26
+            }'>我的关注<img src="img/temp/skin_dark/ico_menu.png" class="cf-img-bkg" data-cf-layout='{
+                    "width":8,
+                    "right":10,
+                    "top":40
+                }'></div>
+
+        <div class="cf-row page-menu-item" data-cf-layout='{
+                "paddingLeft":10,
+                "paddingRight":10,
+                "paddingTop":34,
+                "paddingBottom":20,
+                "fontSize":26
+            }'>足迹地图<img src="img/temp/skin_dark/ico_menu.png" class="cf-img-bkg" data-cf-layout='{
+                    "width":8,
+                    "right":10,
+                    "top":40
+                }'></div>
+
+        <div class="cf-row page-menu-item" data-cf-layout='{
+                "paddingLeft":10,
+                "paddingRight":10,
+                "paddingTop":34,
+                "paddingBottom":20,
+                "fontSize":26
+            }'>漫画广场<img src="img/temp/skin_dark/ico_menu.png" class="cf-img-bkg" data-cf-layout='{
+                    "width":8,
+                    "right":10,
+                    "top":40
+                }'></div>
+
+        <div class="cf-row page-menu-item" data-cf-layout='{
+                "paddingLeft":10,
+                "paddingRight":10,
+                "paddingTop":34,
+                "paddingBottom":20,
+                "fontSize":26
+            }'>更换皮肤<img src="img/temp/skin_dark/ico_menu.png" class="cf-img-bkg" data-cf-layout='{
+                    "width":8,
+                    "right":10,
+                    "top":40
+                }'></div>
+
+        <div class="cf-row page-menu-item" data-cf-layout='{
+                "paddingLeft":10,
+                "paddingRight":10,
+                "paddingTop":34,
+                "paddingBottom":20,
+                "fontSize":26
+            }'>系统设置<img src="img/temp/skin_dark/ico_menu.png" class="cf-img-bkg" data-cf-layout='{
+                    "width":8,
+                    "right":10,
+                    "top":40
+                }'></div>
+
+        <div class="cf-row page-menu-item" data-cf-layout='{
+                "paddingLeft":10,
+                "paddingRight":10,
+                "paddingTop":34,
+                "paddingBottom":20,
+                "fontSize":26
+            }'>关于我们<img src="img/temp/skin_dark/ico_menu.png" class="cf-img-bkg" data-cf-layout='{
+                    "width":8,
+                    "right":10,
+                    "top":40
+                }'></div>
+    </div>
+</div>
 <?php require_once(dirname(__FILE__).'/page_parts/common/js.php');?>
 <script src="js/lib/jquery.exif.js"></script>
 <script src="js/lib/MegaPixImage.js"></script>
@@ -856,6 +988,7 @@
             $img_slide_left:$("#page-slide-left"),
             $img_slide_right:$("#page-slide-right"),
             $article_text:$("#page-article-text"),
+            $side_menu:$("#page-side-menu"),
             $main_page:{
                 $panel:$("#page-main-panel"),
                 $footer:$("#page-main-footer")
@@ -875,7 +1008,8 @@
             $page_mask:$("#page-blur-mask"),
             $page_opt:{
                 $back_to_main:$(".page-go-back-to-index"),
-                $write:$(".page-operation-write")
+                $write:$(".page-operation-write"),
+                $show_menu:$(".page-operation-show-menu")
             },
             $feeling:{
                 $text:$("#page-feeling-text"),
@@ -888,6 +1022,7 @@
 
         g_var = $.extend({}, g_var, {
             cur_feeling_pos:0,cur_feeling_min:0,cur_feeling_max:388,
+            show_menu_status:false,
             pre_publish_status:false,
             publish_status:false,publish_type:'photo'
         });
@@ -1025,6 +1160,31 @@
         g_jq_dom.$article_text.val('');
 
     }
+
+    function toggle_menu(){
+        if(g_var.show_menu_status) {return;}
+        g_var.show_menu_status = true;
+        g_jq_dom.$side_menu.off(g_event.css_ani_event);
+        var shown = g_jq_dom.$side_menu.hasClass("page-menu-shown");
+        if(shown){
+            g_jq_dom.$side_menu.addClass('animated fadeOutRight').on(g_event.css_ani_event, function(){
+                g_jq_dom.$side_menu.hide()
+                    .removeClass('animated fadeOutRight')
+                    .removeClass('page-menu-shown')
+                    .off(g_event.css_ani_event);
+
+                g_var.show_menu_status = false;
+            });
+        } else {
+            g_jq_dom.$side_menu.addClass('animated fadeInRight').show().on(g_event.css_ani_event, function(){
+                g_jq_dom.$side_menu.removeClass('animated fadeInRight')
+                    .addClass('page-menu-shown')
+                    .off(g_event.css_ani_event);
+
+                g_var.show_menu_status = false;
+            });
+        }
+    }
     function page_event_bind(){
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
@@ -1034,6 +1194,7 @@
         g_jq_dom.$img_slide_left.on(g_event.touchend, img_prev);
         g_jq_dom.$img_slide_right.on(g_event.touchend, img_next);
         g_jq_dom.$publish_page.$footer.on(g_event.touchend, publish_article);
+        g_jq_dom.$page_opt.$show_menu.on(g_event.touchend, toggle_menu);
 
         slide_feeling();
     }
@@ -1195,6 +1356,9 @@
         var $blur_mask = g_jq_dom.$page_mask;
         $blur_mask.css({
             "height":g_var.wnd_height
+        });
+        g_jq_dom.$side_menu.css({
+            "height":g_var.wnd_height - 1
         });
 
         img_show_timer();
