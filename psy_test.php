@@ -102,7 +102,7 @@
                 </span>
             </div>
 
-            <div class="cf-row page-test-answer-text" data-cf-layout='{
+            <div class="cf-row page-test-answer-text" data-psy-vector="E" data-cf-layout='{
                     "paddingLeft":68,
                     "paddingBottom":30,
                     "fontSize":24,
@@ -111,7 +111,7 @@
                 <img src="img/temp/psy_test/icon/answer_unselected.png" class="page-answer-item" data-cf-layout='{"width":16}'>
                 <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>你愿意出去找乐子</span>
             </div>
-            <div class="cf-row page-test-answer-text" data-cf-layout='{
+            <div class="cf-row page-test-answer-text" data-psy-vector="I" data-cf-layout='{
                     "paddingLeft":68,
                     "paddingBottom":30,
                     "fontSize":24,
@@ -143,7 +143,7 @@
                 </span>
             </div>
 
-            <div class="cf-row page-test-answer-text" data-cf-layout='{
+            <div class="cf-row page-test-answer-text" data-psy-vector="S" data-cf-layout='{
                     "paddingLeft":68,
                     "paddingBottom":30,
                     "fontSize":24,
@@ -152,7 +152,7 @@
                 <img src="img/temp/psy_test/icon/answer_unselected.png" class="page-answer-item" data-cf-layout='{"width":16}'>
                 <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>当你学习新东西时，是所见即所学</span>
             </div>
-            <div class="cf-row page-test-answer-text" data-cf-layout='{
+            <div class="cf-row page-test-answer-text" data-psy-vector="N" data-cf-layout='{
                     "paddingLeft":68,
                     "paddingBottom":30,
                     "fontSize":24,
@@ -209,7 +209,7 @@
                 </span>
             </div>
 
-            <div class="cf-row page-test-answer-text" data-cf-layout='{
+            <div class="cf-row page-test-answer-text" data-psy-vector="T" data-cf-layout='{
                     "paddingLeft":68,
                     "paddingBottom":30,
                     "fontSize":24,
@@ -218,7 +218,7 @@
                 <img src="img/temp/psy_test/icon/answer_unselected.png" class="page-answer-item" data-cf-layout='{"width":16}'>
                 <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>当你对某件事做出决定时，依靠逻辑推理</span>
             </div>
-            <div class="cf-row page-test-answer-text" data-cf-layout='{
+            <div class="cf-row page-test-answer-text" data-psy-vector="F" data-cf-layout='{
                     "paddingLeft":68,
                     "paddingBottom":30,
                     "fontSize":24,
@@ -250,7 +250,7 @@
                 </span>
             </div>
 
-            <div class="cf-row page-test-answer-text" data-cf-layout='{
+            <div class="cf-row page-test-answer-text" data-psy-vector="J" data-cf-layout='{
                     "paddingLeft":68,
                     "paddingBottom":30,
                     "fontSize":24,
@@ -259,7 +259,7 @@
                 <img class="page-answer-item" src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
                 <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>愿意生活中各方面都井井有条，预先安排</span>
             </div>
-            <div class="cf-row page-test-answer-text" data-cf-layout='{
+            <div class="cf-row page-test-answer-text" data-psy-vector="P" data-cf-layout='{
                     "paddingLeft":68,
                     "paddingBottom":30,
                     "fontSize":24,
@@ -345,17 +345,18 @@
     function select_answer(){
         var $this = $(this);
         var $this_question = $this.parents(".page-test-qa-entry");
-        var $this_answer_img = $this.prev();
-        var $cur_answer = $this_question.find(".page-selected-answer");
-        var $cur_answer_img = $cur_answer.prev();
+        var $this_answer_panel = $this.parents(".page-test-answer-text");
+        var $this_answer_img = $this_answer_panel.find("img");
+        var $cur_answer_panel = $this_question.find(".page-selected-answer");
+        var $cur_answer_img = $cur_answer_panel.find("img");
 
-        if(0 !== $cur_answer.length){
+        if(0 !== $cur_answer_panel.length){
             $cur_answer_img.attr('src', 'img/temp/psy_test/icon/answer_unselected.png');
-            $cur_answer.removeClass("page-selected-answer");
+            $cur_answer_panel.removeClass("page-selected-answer");
         }
 
         $this_answer_img.attr('src', 'img/temp/psy_test/icon/answer_selected.png');
-        $this.addClass("page-selected-answer");
+        $this_answer_panel.addClass("page-selected-answer");
     }
 
     function jump_to_result(){
@@ -363,7 +364,13 @@
             alert("请做完本页面的所有项目选择。");
             return;
         }
-        location.href = 'psy_result.php'
+
+        var $all_entry = $('.page-selected-answer');
+        var psy_vector = '';
+        $all_entry.each(function(){
+            psy_vector += $(this).attr('data-psy-vector');
+        });
+        location.href = 'psy_result.php?psy_vector='+psy_vector;
     }
 
     function bind_event(){

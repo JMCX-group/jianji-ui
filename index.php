@@ -1169,6 +1169,26 @@
         }
     }
 
+    function get_location()
+    {
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(record_location);
+        }
+        else
+        {
+            record_location(null);
+        }
+    }
+
+    function record_location(position)
+    {
+        g_var.location = position;
+
+//        alert(position.coords.latitude);
+//        alert(position.coords.longitude);
+    }
+
     $(function(){
         page_init();
         page_event_bind();
@@ -1181,6 +1201,7 @@
         init_timer();
         init_calendar();
 
+//        get_location();
     });
 </script>
 </body>
