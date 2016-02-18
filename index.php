@@ -127,6 +127,20 @@
             z-index: 1;
         }
 
+        .animated {
+            -webkit-animation-duration: 0.4s;
+            /*-webkit-animation-delay: 0.4s;*/
+
+            -moz-animation-duration: 0.4s;
+            /*-moz-animation-delay: 0.4s;*/
+
+            -ms-animation-duration: 0.4s;
+            /*-ms-animation-delay: 0.4s;*/
+
+            animation-duration: 0.4s;
+            /*animation-delay: 0.4s;*/
+        }
+
         /*begin: debug*/
         #page-publish-footer{
             display: none;
@@ -765,7 +779,7 @@
         <div class="cf-row" data-cf-layout='{
                     "fontSize":0,
                     "paddingBottom":6
-                }'><img src="img/temp/skin_dark/main_page.png" data-cf-layout='{"width":34}'></div>
+                }'><img src="img/temp/skin_dark/main_page.png" class="page-operation-refresh" data-cf-layout='{"width":34}'></div>
         <div class="cf-row">主页</div>
     </div>
     <div class="cf-col-x cf-text-center" data-cf-layout='{
@@ -1011,7 +1025,8 @@
             $page_opt:{
                 $back_to_main:$(".page-go-back-to-index"),
                 $write:$(".page-operation-write"),
-                $show_menu:$(".page-operation-show-menu")
+                $show_menu:$(".page-operation-show-menu"),
+                $page_refresh:$(".page-operation-refresh")
             },
             $feeling:{
                 $text:$("#page-feeling-text"),
@@ -1036,13 +1051,25 @@
         g_jq_dom.$publish_page.$footer.fadeOut(200, function(){
             g_jq_dom.$main_page.$panel.show();
         });
+
+        g_jq_dom.$page_mask.stop().fadeOut(200);
+        g_jq_dom.$pre_publish_page.$panel.removeClass("animated fadeInUp").addClass("animated fadeOutDown");
+        g_jq_dom.$pre_publish_page.$footer.fadeOut(200);
+
+        if(g_var.show_menu_status){
+            toggle_menu();
+        }
     }
     function scene_swap_to_pre_publish(){
+        if(g_var.pre_publish_status){return;}
+        g_var.pre_publish_status = true
         g_jq_dom.$main_page.$panel.show();
-
+        if(g_var.show_menu_status){
+            toggle_menu();
+        }
         g_jq_dom.$page_mask.stop().fadeIn(200);
         g_jq_dom.$pre_publish_page.$panel.show().removeClass("animated fadeOutDown").addClass("animated fadeInUp");
-        g_jq_dom.$pre_publish_page.$footer.fadeIn(200, function(){g_var.pre_publish_status = true});
+        g_jq_dom.$pre_publish_page.$footer.fadeIn(200);
     }
 
     function scene_swap_to_main(){
@@ -1053,8 +1080,11 @@
     }
 
     function scene_swap_to_publish(){
-        if(!g_var.pre_publish_status){return;}
+//        if(!g_var.pre_publish_status){return;}
         g_var.pre_publish_status = false;
+        g_var.publish_status = false;
+        g_jq_dom.$img_list.children().remove();
+        g_jq_dom.$article_text.val('');
         var $this = $(this);
         g_var.publish_type = $this.attr('data-publish-type');
         g_jq_dom.$publish_page.$panel.show().stop().fadeIn(200);
@@ -1133,6 +1163,7 @@
         article_str = article_str.trim();
 
         if(''==article_str && 0 == img_count){
+            console.log(article_str);
             alert("请至少选择一张图片或写下一段文字.");
             g_var.publish_status = false;
             return;
@@ -1156,37 +1187,29 @@
 
         $new_blog_entry.prependTo(g_jq_dom.$blog_list);
         scene_reset_to_main();
-        g_var.publish_status = false;
-
-        g_jq_dom.$img_list.children().remove();
-        g_jq_dom.$article_text.val('');
-
     }
 
     function toggle_menu(){
-        if(g_var.show_menu_status) {return;}
-        g_var.show_menu_status = true;
         g_jq_dom.$side_menu.off(g_event.css_ani_event);
         var shown = g_jq_dom.$side_menu.hasClass("page-menu-shown");
         if(shown){
-            g_jq_dom.$side_menu.addClass('animated fadeOutRight').on(g_event.css_ani_event, function(){
+            g_var.show_menu_status = false;
+            g_jq_dom.$page_mask.stop().fadeOut(300);
+            g_jq_dom.$side_menu.removeClass('animated fadeInRight page-menu-shown').addClass('animated fadeOutRight').on(g_event.css_ani_event, function(){
                 g_jq_dom.$side_menu.hide()
                     .removeClass('animated fadeOutRight')
-                    .removeClass('page-menu-shown')
                     .off(g_event.css_ani_event);
-
-                g_var.show_menu_status = false;
             });
         } else {
-            g_jq_dom.$side_menu.addClass('animated fadeInRight').show().on(g_event.css_ani_event, function(){
+            g_var.show_menu_status = true;
+            g_jq_dom.$page_mask.stop().fadeIn(300);
+            g_jq_dom.$side_menu.removeClass('animated fadeOutRight ').addClass('animated fadeInRight page-menu-shown').show().on(g_event.css_ani_event, function(){
                 g_jq_dom.$side_menu.removeClass('animated fadeInRight')
-                    .addClass('page-menu-shown')
                     .off(g_event.css_ani_event);
-
-                g_var.show_menu_status = false;
             });
         }
     }
+
     function page_event_bind(){
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
@@ -1197,6 +1220,9 @@
         g_jq_dom.$img_slide_right.on(g_event.touchend, img_next);
         g_jq_dom.$publish_page.$footer.on(g_event.touchend, publish_article);
         g_jq_dom.$page_opt.$show_menu.on(g_event.touchend, toggle_menu);
+        g_jq_dom.$page_mask.on(g_event.touchend, scene_reset_to_main);
+
+        g_jq_dom.$page_opt.$page_refresh.on(g_event.touchend, function(){location.reload()});
 
         slide_feeling();
     }
