@@ -759,19 +759,19 @@
         }'>
         <div class="cf-col-3x page-publish-type-btn" data-publish-type="text">
             <img src="img/temp/pre_publish/text.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"paddingTop":22}'>文章</span>
+            <span class="cf-row" data-cf-layout='{"fontSize":20,"paddingTop":22}'>文章</span>
         </div>
         <div class="cf-col-3x page-publish-type-btn" data-publish-type="photo">
             <img src="img/temp/pre_publish/photo.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"paddingTop":22}'>图片</span>
+            <span class="cf-row" data-cf-layout='{"fontSize":20,"paddingTop":22}'>图片</span>
         </div>
         <div class="cf-col-3x page-publish-type-btn" data-publish-type="video">
             <img src="img/temp/pre_publish/video.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"paddingTop":22}'>视频</span>
+            <span class="cf-row" data-cf-layout='{"fontSize":20,"paddingTop":22}'>视频</span>
         </div>
         <div class="cf-col-3x page-publish-type-btn" data-publish-type="audio">
             <img src="img/temp/pre_publish/audio.png" data-cf-layout='{"width":110}'>
-            <span class="cf-row" data-cf-layout='{"paddingTop":22}'>语音</span>
+            <span class="cf-row" data-cf-layout='{"fontSize":20,"paddingTop":22}'>语音</span>
         </div>
     </div>
 </div>
