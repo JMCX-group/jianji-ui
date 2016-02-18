@@ -55,17 +55,18 @@
                     _callback();
                 }
                 _callback = undefined;
+                re_init();
             });
         };
         _file_reader.readAsDataURL(file);
     }
 
-    function _init(){
-        $_input = $('<input type="file" accept="image/*" style="display: none">');
-        _temp_canvas = document.createElement("canvas");
+    function re_init(){
+        $_input = undefined;
+        $_input = $('<input type="file" accept="image/*" style="display:none">');
         $_input.on("change.camera_plus", _get_image);
     }
-    _init();
+    re_init();
 })(window, jQuery);
 
 (function(win, $, undefined){
