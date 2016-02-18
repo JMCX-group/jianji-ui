@@ -1405,7 +1405,7 @@
     function record_location(position)
     {
         g_var.location = position;
-        $.get("jianji-demo/map.php?lat="+position.coords.latitude+"&lng="+position.coords.longitude, function(data){
+        $.get("map.php?lat="+position.coords.latitude+"&lng="+position.coords.longitude, function(data){
             g_jq_dom.$location_panel.text(data.result.sematic_description).css({overflow:"hidden"});
         },"json");
     }
