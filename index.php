@@ -1175,7 +1175,7 @@
     function publish_article(){
         if(g_var.publish_status) {return;}
         g_var.publish_status = true;
-        var $all_img = g_jq_dom.$img_list.find("img");
+        var $all_img = g_jq_dom.$img_list.find("img.page-blog-img");
         var article_str = g_jq_dom.$article_text.val();
         var img_count = $all_img.length;
         article_str = article_str.trim();
