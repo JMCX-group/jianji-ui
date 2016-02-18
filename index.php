@@ -710,35 +710,35 @@
                     "width":100,
                     "height":100,
                     "marginRight":10
-                }'><img src="img/temp/publish/share_wechat.png" data-cf-layout='{"width":100}' class="cf-img-bkg">
+                }'><img src="img/temp/publish/share_wechat_en.png" data-cf-layout='{"width":100}' data-share-base="share_wechat" class="cf-img-bkg page-share-btn page-share-selected">
             </div>
 
             <div class="cf-col-x" data-cf-layout='{
                     "width":100,
                     "height":100,
                     "marginRight":10
-                }'><img src="img/temp/publish/share_friend.png" data-cf-layout='{"width":100}' class="cf-img-bkg">
+                }'><img src="img/temp/publish/share_friend.png" data-cf-layout='{"width":100}' data-share-base="share_friend" class="cf-img-bkg page-share-btn">
             </div>
 
             <div class="cf-col-x" data-cf-layout='{
                     "width":100,
                     "height":100,
                     "marginRight":10
-                }'><img src="img/temp/publish/share_qq.png" data-cf-layout='{"width":100}' class="cf-img-bkg">
+                }'><img src="img/temp/publish/share_qq.png" data-cf-layout='{"width":100}' data-share-base="share_qq" class="cf-img-bkg page-share-btn">
             </div>
 
             <div class="cf-col-x" data-cf-layout='{
                     "width":100,
                     "height":100,
                     "marginRight":10
-                }'><img src="img/temp/publish/share_weibo.png" data-cf-layout='{"width":100}' class="cf-img-bkg">
+                }'><img src="img/temp/publish/share_weibo_en.png" data-cf-layout='{"width":100}' data-share-base="share_weibo" class="cf-img-bkg page-share-btn page-share-selected">
             </div>
 
             <div class="cf-col-x" data-cf-layout='{
                     "width":100,
                     "height":100,
                     "marginRight":10
-                }'><img src="img/temp/publish/share_douban.png" data-cf-layout='{"width":100}' class="cf-img-bkg">
+                }'><img src="img/temp/publish/share_douban.png" data-cf-layout='{"width":100}' data-share-base="share_douban" class="cf-img-bkg page-share-btn">
             </div>
         </div>
     </div>
@@ -1021,6 +1021,7 @@
             $img_slide_right:$("#page-slide-right"),
             $article_text:$("#page-article-text"),
             $side_menu:$("#page-side-menu"),
+            $share_btn:$(".page-share-btn"),
             $main_page:{
                 $panel:$("#page-main-panel"),
                 $footer:$("#page-main-footer")
@@ -1235,6 +1236,16 @@
         img_next();
     }
 
+    function switch_share_status(){
+        var $this = $(this);
+        var share_base = 'img/temp/publish/'+$this.attr('data-share-base');
+        if($this.hasClass("page-share-selected")){
+            $this.attr("src",share_base+'.png').removeClass('page-share-selected');
+        } else {
+            $this.attr("src",share_base+'_en.png').addClass('page-share-selected');
+        }
+    }
+
     function page_event_bind(){
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
@@ -1247,6 +1258,8 @@
         g_jq_dom.$page_opt.$show_menu.on(g_event.touchend, toggle_menu);
         g_jq_dom.$page_mask.on(g_event.touchend, scene_reset_to_main);
         g_jq_dom.$body.on(g_event.touchend, '.page-remove-img', remove_publish_img);
+
+        g_jq_dom.$share_btn.on(g_event.touchmove)
 
         g_jq_dom.$page_opt.$page_refresh.on(g_event.touchend, function(){location.reload()});
 
