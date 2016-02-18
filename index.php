@@ -130,10 +130,12 @@
         /*begin: debug*/
         #page-publish-footer{
             display: none;
+            z-index: 3;
         }
 
         #page-pre-publish-footer{
             display: none;
+            z-index: 2;
         }
         #page-main-panel{
             /*display: none;*/
