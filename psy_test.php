@@ -108,8 +108,10 @@
                     "fontSize":24,
                     "lineHeight":24
                 }'>
-                <img src="img/temp/psy_test/icon/answer_unselected.png" class="page-answer-item" data-cf-layout='{"width":16}'>
-                <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>你愿意出去找乐子</span>
+                <div class="cf-row page-answer-item">
+                    <img src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
+                    <span data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>你愿意出去找乐子</span>
+                </div>
             </div>
             <div class="cf-row page-test-answer-text" data-psy-vector="I" data-cf-layout='{
                     "paddingLeft":68,
@@ -117,8 +119,10 @@
                     "fontSize":24,
                     "lineHeight":24
                 }'>
-                <img src="img/temp/psy_test/icon/answer_unselected.png" class="page-answer-item" data-cf-layout='{"width":16}'>
-                <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>还是愿意呆在家里看一本好书或看电视</span>
+                <div class="cf-row page-answer-item">
+                    <img src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
+                    <span data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>还是愿意呆在家里看一本好书或看电视</span>
+                </div>
             </div>
         </div>
 
@@ -149,8 +153,10 @@
                     "fontSize":24,
                     "lineHeight":24
                 }'>
-                <img src="img/temp/psy_test/icon/answer_unselected.png" class="page-answer-item" data-cf-layout='{"width":16}'>
-                <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>当你学习新东西时，是所见即所学</span>
+                <div class="cf-row page-answer-item">
+                    <img src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
+                    <span data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>当你学习新东西时，是所见即所学</span>
+                </div>
             </div>
             <div class="cf-row page-test-answer-text" data-psy-vector="N" data-cf-layout='{
                     "paddingLeft":68,
@@ -158,8 +164,10 @@
                     "fontSize":24,
                     "lineHeight":24
                 }'>
-                <img class="page-answer-item" src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
-                <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>或根据自己的直觉添加/删除印象</span>
+                <div class="cf-row page-answer-item">
+                    <img src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
+                    <span data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>或根据自己的直觉添加/删除印象</span>
+                </div>
             </div>
         </div>
 
@@ -215,8 +223,10 @@
                     "fontSize":24,
                     "lineHeight":24
                 }'>
-                <img src="img/temp/psy_test/icon/answer_unselected.png" class="page-answer-item" data-cf-layout='{"width":16}'>
-                <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>当你对某件事做出决定时，依靠逻辑推理</span>
+                <div class="cf-row page-answer-item">
+                    <img src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
+                    <span data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>当你对某件事做出决定时，依靠逻辑推理</span>
+                </div>
             </div>
             <div class="cf-row page-test-answer-text" data-psy-vector="F" data-cf-layout='{
                     "paddingLeft":68,
@@ -224,8 +234,10 @@
                     "fontSize":24,
                     "lineHeight":24
                 }'>
-                <img class="page-answer-item" src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
-                <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>还是倾向于情感和移情</span>
+                <div class="cf-row page-answer-item">
+                    <img src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
+                    <span data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>还是倾向于情感和移情</span>
+                </div>
             </div>
         </div>
 
@@ -256,8 +268,10 @@
                     "fontSize":24,
                     "lineHeight":24
                 }'>
-                <img class="page-answer-item" src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
-                <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>愿意生活中各方面都井井有条，预先安排</span>
+                <div class="cf-row page-answer-item">
+                    <img src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
+                    <span data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>愿意生活中各方面都井井有条，预先安排</span>
+                </div>
             </div>
             <div class="cf-row page-test-answer-text" data-psy-vector="P" data-cf-layout='{
                     "paddingLeft":68,
@@ -265,8 +279,10 @@
                     "fontSize":24,
                     "lineHeight":24
                 }'>
-                <img class="page-answer-item" src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
-                <span class="page-answer-item" data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>还是喜欢突如其来，令人惊喜</span>
+                <div class="cf-row page-answer-item">
+                    <img src="img/temp/psy_test/icon/answer_unselected.png" data-cf-layout='{"width":16}'>
+                    <span data-cf-layout='{"marginLeft":20, "width":470,"paddingBottom":22}'>还是喜欢突如其来，令人惊喜</span>
+                </div>
             </div>
         </div>
 
