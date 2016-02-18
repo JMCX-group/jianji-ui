@@ -681,7 +681,7 @@
                 "lineHeight":60
             }'>
             <div class="cf-col-x" data-cf-layout='{"width":30}'><img src="img/temp/publish/icon_location.png" class="cf-img-bkg" data-cf-layout='{"width":30,"marginTop":20}'></div>
-            <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22}'>添加位置</div>
+            <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22}' id="page-location-panel">添加位置</div>
             <div class="cf-col-x" data-cf-layout='{"width":20,"textAlign":"right"}'><img src="img/temp/publish/icon_arrow.png" data-cf-layout='{"width":14}'></div>
         </div>
 
@@ -702,7 +702,7 @@
             }'>
             <div class="cf-col-x" data-cf-layout='{"width":30}'><img src="img/temp/publish/icon_sync.png" class="cf-img-bkg" data-cf-layout='{"width":30,"marginTop":20}'></div>
             <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22}'>同步至</div>
-            <div class="cf-col-x" data-cf-layout='{"width":20,"textAlign":"right"}'><img src="img/temp/publish/icon_arrow.png" data-cf-layout='{"width":14}'></div>
+            <div class="cf-col-x" data-cf-layout='{"width":20,"textAlign":"right"}'></div>
         </div>
 
         <div class="cf-row">
@@ -1012,6 +1012,7 @@
     function page_init(){
         g_jq_dom = $.extend({}, g_jq_dom, {
             $blog_list:$("#page-blog-list"),
+            $location_panel:$("#page-location-panel"),
             $img_temp:$("#page-img-template"),
             $img_list:$("#page-img-list"),
             $add_img_btn:$("#page-add-img-btn"),
@@ -1097,6 +1098,7 @@
 
     function scene_swap_to_publish(){
 //        if(!g_var.pre_publish_status){return;}
+        get_location();
         g_var.pre_publish_status = false;
         g_var.publish_status = false;
         g_jq_dom.$img_list.children().remove();
@@ -1390,7 +1392,7 @@
     {
         if (navigator.geolocation)
         {
-            navigator.geolocation.getCurrentPosition(record_location);
+            navigator.geolocation.getCurrentPosition(record_location, show_location_err);
         }
         else
         {
@@ -1398,12 +1400,14 @@
         }
     }
 
+    function show_location_err(){g_jq_dom.$location_panel.text('地理位置已禁用');}
+
     function record_location(position)
     {
         g_var.location = position;
-
-//        alert(position.coords.latitude);
-//        alert(position.coords.longitude);
+        $.get("jianji-demo/map.php?lat="+position.coords.latitude+"&lng="+position.coords.longitude, function(data){
+            g_jq_dom.$location_panel.text(data.result.sematic_description).css({overflow:"hidden"});
+        },"json");
     }
 
     $(function(){
@@ -1420,8 +1424,6 @@
         img_show_timer();
         init_timer();
         init_calendar();
-
-//        get_location();
     });
 </script>
 </body>
