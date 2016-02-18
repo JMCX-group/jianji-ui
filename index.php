@@ -65,13 +65,20 @@
             left:auto !important;
         }
 
+        .page-remove-img{
+            display: none;
+            position: absolute;
+            right: 0;
+            top:0;
+        }
+
         #page-main-footer,
         #page-pre-publish-footer,
         #page-publish-footer{
             position: fixed;
             left: 50%;
             bottom: 0;
-            background-color: rgb(44,44,52);
+            background-color: rgb(60,60,70);
             color:#fff;
         }
 
@@ -170,7 +177,8 @@
     <img src="img/temp/skin_dark/demo_bkg.jpg" class="cf-img-bkg">
     <div class="cf-row cf-text-center" data-cf-layout='{
             "paddingTop":100,
-            "paddingBottom":40
+            "paddingBottom":40,
+            "fontSize":0
         }'><img src="img/temp/demo_head_famale.png" data-cf-layout='{
                 "border":{
                     "width":8,
@@ -182,7 +190,10 @@
                 "boxSizing":"border-box"
             }'>
     </div>
-    <div class="cf-row cf-text-center"><img src="img/temp/skin_dark/show_curve.png" data-cf-layout='{
+    <div class="cf-row cf-text-center" data-cf-layout='{
+            "height":40,
+            "marginBottom":30
+        }'><img src="img/temp/skin_dark/show_curve.png" data-cf-layout='{
                 "width":170
             }'>
     </div>
@@ -586,7 +597,7 @@
             "width":540
         }'>
         <img src="img/temp/publish/add_img_bkg.jpg" data-cf-layout='{"width":540,"left":0,"top":20}' id="page-img-template" class="cf-img-bkg">
-        <div class="cf-row cf-text-center" id="page-img-list" data-cf-layout='{"width":540,"height":300,"left":0,"top":20}'></div>
+        <div class="cf-row cf-text-center" id="page-img-list" data-cf-layout='{"width":540,"height":300,"left":0,"top":20,"zIndex":2}'></div>
         <div class="cf-row" id="page-img-add-tip" data-cf-layout='{
                 "position":"absolute",
                 "left":20,
@@ -871,6 +882,10 @@
                             "marginRight":10
                         }'><img src=""></div>
 
+<img src="img/temp/demo_del_img.png" id="page-template-remove-img" class="page-remove-img" data-cf-layout='{
+        "width":24
+    }'>
+
 <div class="cf-row" id="page-side-menu" data-cf-layout='{
         "paddingLeft":55,
         "paddingRight":55,
@@ -1033,6 +1048,7 @@
                 $line:$("#page-feeling-line"),
                 $btn:$("#page-feeling-btn")
             },
+            $remove_img_temp:$("#page-template-remove-img").remove().removeAttr("id"),
             $blog_entry_temp:$("#page-template-blog-entry").remove().removeAttr("id"),
             $blog_entry_temp_img:$("#page-template-blog-entry-img").remove().removeAttr("id")
         });
@@ -1210,6 +1226,13 @@
         }
     }
 
+    function remove_publish_img(){
+        var $this = $(this);
+        var $this_img = $this.parent();
+        $this_img.remove();
+        img_next();
+    }
+
     function page_event_bind(){
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
@@ -1221,6 +1244,7 @@
         g_jq_dom.$publish_page.$footer.on(g_event.touchend, publish_article);
         g_jq_dom.$page_opt.$show_menu.on(g_event.touchend, toggle_menu);
         g_jq_dom.$page_mask.on(g_event.touchend, scene_reset_to_main);
+        g_jq_dom.$body.on(g_event.touchend, '.page-remove-img', remove_publish_img);
 
         g_jq_dom.$page_opt.$page_refresh.on(g_event.touchend, function(){location.reload()});
 
@@ -1228,8 +1252,9 @@
     }
 
     function start_shooting(){
-        var $new_img = $('<div class="cf-row page-shown-img" style="height:100%"><img><div>');
+        var $new_img = $('<div class="cf-row page-shown-img" style="height:100%"><img class="page-blog-img"><div>');
         var $img_el = $new_img.find('img');
+        g_jq_dom.$remove_img_temp.clone().show().appendTo($new_img);
         camera_plus.start_camera({
             show_panel:$img_el,
             callback:function(){
@@ -1257,6 +1282,9 @@
             g_jq_dom.$img_list.hide();
             g_jq_dom.$add_img_tip.show();
             g_jq_dom.$add_img_btn.show();
+
+            g_jq_dom.$img_slide_left.hide();
+            g_jq_dom.$img_slide_right.hide();
         } else {
             g_jq_dom.$img_list.show();
             g_jq_dom.$add_img_tip.hide();
