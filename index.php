@@ -1259,7 +1259,7 @@
         g_jq_dom.$page_mask.on(g_event.touchend, scene_reset_to_main);
         g_jq_dom.$body.on(g_event.touchend, '.page-remove-img', remove_publish_img);
 
-        g_jq_dom.$share_btn.on(g_event.touchmove)
+        g_jq_dom.$share_btn.on(g_event.touchmove, switch_share_status);
 
         g_jq_dom.$page_opt.$page_refresh.on(g_event.touchend, function(){location.reload()});
 
