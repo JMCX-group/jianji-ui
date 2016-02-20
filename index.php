@@ -1300,7 +1300,7 @@
 
 
         var $new_blog_entry = g_jq_dom.$blog_entry_temp.clone();
-        var tip_html = '刚刚&nbsp;nbsp;';
+        var tip_html = '刚刚&nbsp;&nbsp;';
         var $time_panel = $new_blog_entry.find('.page-blog-publish-time');
         $new_blog_entry.find('.page-type-node').find('img').attr('src', 'img/temp/skin_light/type_'+g_var.publish_type+'.png');
         if('' != tag_str){
@@ -1309,7 +1309,7 @@
         }
 
         if(g_jq_dom.$location_panel.attr('page-has-location')){
-            tip_html += '&nbsp;nbsp;位置：'+g_jq_dom.$location_panel.text();
+            tip_html += '&nbsp;&nbsp;位置：'+g_jq_dom.$location_panel.text();
         }
         $time_panel.html(tip_html);
         if('' == article_str){
