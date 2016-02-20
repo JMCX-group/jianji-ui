@@ -33,6 +33,7 @@ var g_event = {
     keypress:"keypress",
     keydown:"keydown",
     keyup:"keyup",
+    focus:"focus",
     blur:"blur"
 };
 
