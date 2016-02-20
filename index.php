@@ -100,6 +100,40 @@
             background-color: rgb(60,60,70);
             color:#fff;
         }
+        #page-tag-input{
+            border: 0;
+            padding: 0;
+            background-color: transparent;
+            outline: none;
+            color: #fff;
+            font-family: "Arial ", "Hiragino Sans GB W3", "Hiragino Sans GB", "Microsoft YaHei", sans-serif, 'MS Sans Serif', Geneva, sans-serif;
+        }
+
+        #page-tag-input::-webkit-input-placeholder { /* WebKit browsers */
+            color:rgb(255,255,255);
+        }
+        #page-tag-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color:rgb(255,255,255);
+        }
+        #page-tag-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color:rgb(255,255,255);
+        }
+        #page-tag-input:-ms-input-placeholder { /* Internet Explorer 10+ */
+            color:rgb(255,255,255);
+        }
+
+        #page-tag-input:focus::-webkit-input-placeholder { /* WebKit browsers */
+            color:rgb(68,79,103);
+        }
+        #page-tag-input:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color:rgb(68,79,103);
+        }
+        #page-tag-input:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color:rgb(68,79,103);
+        }
+        #page-tag-input:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
+            color:rgb(68,79,103);
+        }
 
         #page-publish-top{
             background-color: rgba(0,0,0,0.2);
@@ -690,7 +724,11 @@
                 "lineHeight":60
             }'>
             <div class="cf-col-x" data-cf-layout='{"width":30}'><img src="img/temp/publish/icon_tag.png" class="cf-img-bkg" data-cf-layout='{"width":30,"marginTop":20}'></div>
-            <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22}'>添加标签</div>
+            <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22,"overflow":"hidden"}'><input id="page-tag-input" maxlength="10" placeholder="添加标签" data-cf-layout='{
+                    "width":480,
+                    "fontSize":22,
+                    "color":"#fff"
+                }'></div>
             <div class="cf-col-x" data-cf-layout='{"width":20,"textAlign":"right"}'><img src="img/temp/publish/icon_arrow.png" data-cf-layout='{"width":14}'></div>
         </div>
 
@@ -1057,6 +1095,7 @@
             $article_text:$("#page-article-text"),
             $side_menu:$("#page-side-menu"),
             $share_btn:$(".page-share-btn"),
+            $tag_input:$("#page-tag-input"),
             $main_page:{
                 $panel:$("#page-main-panel"),
                 $footer:$("#page-main-footer")
@@ -1249,6 +1288,7 @@
         var $all_img = g_jq_dom.$img_list.find("img.page-blog-img");
         var article_str = g_jq_dom.$article_text.val();
         var img_count = $all_img.length;
+        var tag_str = g_jq_dom.$tag_input.val();
         article_str = article_str.trim();
 
         if(''==article_str && 0 == img_count){
@@ -1260,7 +1300,18 @@
 
 
         var $new_blog_entry = g_jq_dom.$blog_entry_temp.clone();
+        var tip_html = '刚刚&nbsp;nbsp;';
+        var $time_panel = $new_blog_entry.find('.page-blog-publish-time');
         $new_blog_entry.find('.page-type-node').find('img').attr('src', 'img/temp/skin_light/type_'+g_var.publish_type+'.png');
+        if('' != tag_str){
+            $time_panel.text(tag_str);
+            tip_html += $time_panel.text();
+        }
+
+        if(g_jq_dom.$location_panel.attr('page-has-location')){
+            tip_html += '&nbsp;nbsp;位置：'+g_jq_dom.$location_panel.text();
+        }
+        $time_panel.html(tip_html);
         if('' == article_str){
             $new_blog_entry.find('.page-text-panel').remove();
         } else {
@@ -1276,6 +1327,8 @@
             $new_img.appendTo($new_blog_entry.find('.page-img-panel'));
             scale_blog_img($blog_img);
         });
+
+
 
         scene_reset_to_main();
     }
@@ -1372,6 +1425,37 @@
         g_jq_dom.$show_blog_img_panel.stop().fadeOut(200);
         g_jq_dom.$show_blog_img_panel.removeClass('page-shown');
     }
+
+    function edit_tag(){
+        var $this = $(this);
+        var last_tag_str = $this.attr('page-tag-str');
+        if(last_tag_str){
+            $this.val(last_tag_str);
+        }
+    }
+    function show_tag(){
+        var $this = $(this);
+        var tag_str = $this.val();
+        tag_str =tag_str.trim();
+        if('' != tag_str){
+            $this.val('#'+tag_str);
+            $this.attr('page-tag-str', tag_str);
+        } else {
+            $this.val('');
+            $this.removeAttr('page-tag-str');
+        }
+    }
+    function filter_tag_input(e){
+        if(32 == e.keyCode){
+            return false;
+        }
+    }
+    function input_enter(e){
+        var $this = $(this);
+        if(13 == e.keyCode){
+            $this.blur();
+        }
+    }
     function page_event_bind(){
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
@@ -1386,6 +1470,10 @@
         g_jq_dom.$body.on(g_event.touchend, '.page-remove-img', remove_publish_img);
         g_jq_dom.$body.on(g_event.touchend, '.page-img-panel img', show_blog_img);
         g_jq_dom.$show_blog_img_panel.on(g_event.touchend, hide_blog_img);
+        g_jq_dom.$tag_input.on(g_event.focus, edit_tag);
+        g_jq_dom.$tag_input.on(g_event.blur, show_tag);
+        g_jq_dom.$tag_input.on(g_event.keydown, filter_tag_input);
+        g_jq_dom.$tag_input.on(g_event.keypress, input_enter);
 
         g_jq_dom.$share_btn.on(g_event.touchend, switch_share_status);
 
@@ -1541,13 +1629,13 @@
         }
     }
 
-    function show_location_err(){g_jq_dom.$location_panel.text('地理位置已禁用');}
+    function show_location_err(e){console.log(e);g_jq_dom.$location_panel.text('地理位置已禁用');}
 
     function record_location(position)
     {
         g_var.location = position;
         $.get("map.php?lat="+position.coords.latitude+"&lng="+position.coords.longitude, function(data){
-            g_jq_dom.$location_panel.text(data.result.sematic_description).css({overflow:"hidden"});
+            g_jq_dom.$location_panel.text(data.result.sematic_description).css({overflow:"hidden"}).attr("page-has-location", 'page-has-location');
         },"json");
     }
 
