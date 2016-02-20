@@ -797,8 +797,8 @@
 <!-- end: 预发布界面 -->
 
 <div id="page-show-blog-img-panel" data-cf-layout='{
-        "paddingLeft":70,
-        "paddingRight":70,
+        "paddingLeft":20,
+        "paddingRight":20,
         "paddingTop":80,
         "paddingBottom":100
     }'>
@@ -1096,7 +1096,7 @@
             pre_publish_status:false,
             publish_status:false,publish_type:'photo',
             blog_img_size:156*g_var.scale_ratio,
-            show_blog_img_panel_width:g_jq_dom.$show_blog_img_panel.width() * g_var.scale_ratio,
+            show_blog_img_panel_width:g_jq_dom.$show_blog_img_panel.width(),
             show_blog_img_panel_height:g_var.wnd_height
         });
     }
