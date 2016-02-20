@@ -58,6 +58,20 @@
             top:0;
             visibility: hidden;
         }
+
+        .animated {
+            -webkit-animation-duration: 0.4s;
+            /*-webkit-animation-delay: 0.4s;*/
+
+            -moz-animation-duration: 0.4s;
+            /*-moz-animation-delay: 0.4s;*/
+
+            -ms-animation-duration: 0.4s;
+            /*-ms-animation-delay: 0.4s;*/
+
+            animation-duration: 0.4s;
+            /*animation-delay: 0.4s;*/
+        }
     </style>
 </head>
 <body class="cf-invisible">
