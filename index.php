@@ -72,6 +72,25 @@
             top:0;
         }
 
+        #page-show-blog-img-panel{
+            display: none;
+            box-sizing: border-box;
+            position: fixed;
+            width:100%;
+            left: 0;
+            top: 0;
+            font-size: 0;
+            text-align: center;
+            overflow: hidden;
+            background-color: rgba(37,37,37,0.95);
+            z-index: 4;
+        }
+        #page-show-blog-img-panel > div.page-img-count{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
         #page-main-footer,
         #page-pre-publish-footer,
         #page-publish-footer{
@@ -417,7 +436,7 @@
                             "marginRight":10
                         }'>
                         <img src="img/temp/demo_video_cover.jpg">
-                        <img src="img/temp/skin_dark/play_btn.png" data-cf-layout='{
+                        <img src="img/temp/skin_dark/play_btn.png" class="page-blog-play-video-btn" data-cf-layout='{
                                 "position":"absolute",
                                 "width":70,
                                 "height":70,
@@ -777,6 +796,19 @@
 </div>
 <!-- end: 预发布界面 -->
 
+<div id="page-show-blog-img-panel" data-cf-layout='{
+        "paddingLeft":70,
+        "paddingRight":70,
+        "paddingTop":80,
+        "paddingBottom":100
+    }'>
+    <div class="cf-row page-img-count" data-cf-layout='{
+            "fontSize":20,
+            "height":80,
+            "lineHeight":80
+        }'></div>
+</div>
+
 <div class="cf-row" id="page-main-footer" data-cf-layout='{
             "height":98,
             "paddingTop":22,
@@ -830,7 +862,6 @@
         "marginLeft":-320,
         "width":640
     }'>发布</div>
-
 
 <div class="cf-row page-blog-entry" id="page-template-blog-entry" data-cf-layout='{
                 "paddingLeft":20,
@@ -1004,6 +1035,7 @@
     </div>
 </div>
 <?php require_once(dirname(__FILE__).'/page_parts/common/js.php');?>
+<script src="js/lib/jquery.slides.min.js"></script>
 <script src="js/lib/jquery.exif.js"></script>
 <script src="js/lib/MegaPixImage.js"></script>
 <script src="js/lib/common.js"></script>
@@ -1015,6 +1047,7 @@
         g_jq_dom = $.extend({}, g_jq_dom, {
             $blog_list:$("#page-blog-list"),
             $location_panel:$("#page-location-panel"),
+            $show_blog_img_panel:$("#page-show-blog-img-panel"),
             $img_temp:$("#page-img-template"),
             $img_list:$("#page-img-list"),
             $add_img_btn:$("#page-add-img-btn"),
@@ -1062,7 +1095,9 @@
             show_menu_status:false,
             pre_publish_status:false,
             publish_status:false,publish_type:'photo',
-            blog_img_size:156*g_var.scale_ratio
+            blog_img_size:156*g_var.scale_ratio,
+            show_blog_img_panel_width:g_jq_dom.$show_blog_img_panel.width() * g_var.scale_ratio,
+            show_blog_img_panel_height:g_var.wnd_height
         });
     }
 
@@ -1283,6 +1318,60 @@
         }
     }
 
+    function show_blog_img(){
+        var $this_img = $(this);
+        if($this_img.hasClass('page-blog-play-video-btn')){
+            $this_img = $this_img.siblings("img");
+        }
+        var $this_panel = $this_img.parents('.page-img-panel');
+        var $all_img = $this_img;//$this_panel.find('img');
+
+        g_jq_dom.$show_blog_img_panel.find('img').remove();
+        function add_img_to_panel(img_src){
+            var $new_img = $('<img src="'+img_src+'">');
+            $new_img.appendTo(g_jq_dom.$show_blog_img_panel);
+
+            var dom_img = $new_img.get(0);
+            var img_width = dom_img.width;
+            var img_height = dom_img.height;
+
+            var img_scale_width;
+            var img_fix_top = 80 * g_var.scale_ratio;
+            if(img_width <= g_var.show_blog_img_panel_width && img_height <= g_var.show_blog_img_panel_height){
+                $new_img.css({marginTop: ((g_var.show_blog_img_panel_height - img_height) / 2) - img_fix_top})
+            } else if(img_width <= g_var.show_blog_img_panel_width && img_height >= g_var.show_blog_img_panel_height){
+                $new_img.css({height:g_var.show_blog_img_panel_height})
+            } else if(img_width >= g_var.show_blog_img_panel_width && img_height <= g_var.show_blog_img_panel_height){
+                $new_img.css({width:g_var.show_blog_img_panel_width});
+                img_scale_width = g_var.show_blog_img_panel_width / img_width;
+                $new_img.css({marginTop: ((g_var.show_blog_img_panel_height - img_height * img_scale_width) / 2) - img_fix_top})
+            } else {
+                var panel_ratio = g_var.show_blog_img_panel_width / g_var.show_blog_img_panel_height;
+                var img_ratio = img_width / img_height;
+
+                if(panel_ratio <= img_ratio){
+                    $new_img.css({width:g_var.show_blog_img_panel_width});
+                    img_scale_width = g_var.show_blog_img_panel_width / img_width;
+                    $new_img.css({marginTop: ((g_var.show_blog_img_panel_height - img_height * img_scale_width) / 2) - img_fix_top})
+                } else {
+                    $new_img.css({height:g_var.show_blog_img_panel_height});
+                }
+            }
+        }
+
+        $all_img.each(function(){
+            var $this = $(this);
+            add_img_to_panel($this.attr('src'));
+        });
+        g_jq_dom.$show_blog_img_panel.stop().fadeIn(200, function(){
+            g_jq_dom.$show_blog_img_panel.addClass("page-shown");
+        });
+    }
+    function hide_blog_img(){
+        if(!g_jq_dom.$show_blog_img_panel.hasClass('page-shown')){return;}
+        g_jq_dom.$show_blog_img_panel.stop().fadeOut(200);
+        g_jq_dom.$show_blog_img_panel.removeClass('page-shown');
+    }
     function page_event_bind(){
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
@@ -1295,6 +1384,8 @@
         g_jq_dom.$page_opt.$show_menu.on(g_event.touchend, toggle_menu);
         g_jq_dom.$page_mask.on(g_event.touchend, scene_reset_to_main);
         g_jq_dom.$body.on(g_event.touchend, '.page-remove-img', remove_publish_img);
+        g_jq_dom.$body.on(g_event.touchend, '.page-img-panel img', show_blog_img);
+        g_jq_dom.$show_blog_img_panel.on(g_event.touchend, hide_blog_img);
 
         g_jq_dom.$share_btn.on(g_event.touchend, switch_share_status);
 
@@ -1463,8 +1554,10 @@
     $(function(){
         page_init();
         page_event_bind();
-        var $blur_mask = g_jq_dom.$page_mask;
-        $blur_mask.css({
+        g_jq_dom.$show_blog_img_panel.css({
+            "height":g_var.wnd_height
+        });
+        g_jq_dom.$page_mask.css({
             "height":g_var.wnd_height
         });
         g_jq_dom.$side_menu.css({
