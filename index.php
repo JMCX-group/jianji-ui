@@ -155,12 +155,10 @@
             left:50%;
             bottom: 0;
         }
-
         #page-pre-publish-panel #page-pre-publish-type-panel{
             text-align: center;
             color: #fff;
         }
-
         #page-blur-mask{
             position: fixed;
             left:0;
@@ -168,7 +166,6 @@
             display: none;
             background-color: rgba(37,37,37,0.95);
         }
-
         #page-img-list{
             position: absolute;
             overflow: hidden;
@@ -185,6 +182,52 @@
         }
         #page-main-footer{
             z-index: 1;
+        }
+
+        #page-filters-panel{
+            display: none;
+            position: absolute;
+            left:50%;
+            top:0;
+            z-index: 5;
+        }
+
+        #page-filters-top{
+            color:#fff;
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        #page-filters-preview-panel{
+            text-align: center;
+        }
+        #page-filters-list-panel{
+            overflow: hidden;
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        #page-filters-list-panel-inner{
+            left: 0;
+            top: 0;
+            text-align: center;
+        }
+
+        #page-filters-list-panel-inner .page-filter-type{
+            overflow: hidden;
+            float: left;
+            text-align: center;
+            color:#fff;
+        }
+
+        #page-filters-list-panel-inner .page-filter-type .page-filter-name{
+            background-color:  rgba(0,0,0,0.8);
+        }
+
+        .page-filter-cache-preview{
+            display: none;
+        }
+
+        #page-filters-list-panel-inner .page-filter-type.page-filter-selected{
+            border-color: #fff !important;
         }
 
         .animated {
@@ -221,6 +264,54 @@
             display: none;
         }
         /*end: debug*/
+
+        #page-filter-loading-page{
+            display: none;
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .page-load-ani .page-loader {
+            margin: 0 auto;
+            font-size: 10px;
+            position: relative;
+            text-indent: -9999em;
+            border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-left: 1.1em solid #ffffff;
+            -webkit-animation: page-load-ani 1.1s infinite linear;
+            animation: page-load-ani 1.1s infinite linear;
+        }
+        .page-load-ani .page-loader,
+        .page-load-ani .page-loader:after {
+            border-radius: 50%;
+            width: 6em;
+            height: 6em;
+        }
+        @-webkit-keyframes page-load-ani {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes page-load-ani {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body class="cf-invisible">
@@ -834,6 +925,148 @@
 </div>
 <!-- end: 预发布界面 -->
 
+<!-- begin: 滤镜页面 -->
+<div class="cf-wrap cf-wrap-no-bottom" id="page-filters-panel" data-cf-layout='{
+        "width":640,
+        "marginLeft":-320
+    }'>
+    <img src="img/temp/publish/bkg.png" class="cf-img-bkg">
+    <div class="cf-row" id="page-filters-top"
+         data-cf-layout='{
+                "paddingTop":28,
+                "paddingBottom":28,
+                "marginBottom":118
+            }'>
+        <div class="cf-row" data-cf-layout='{
+                "height":30,
+                "lineHeight":30
+            }'>
+            <div class="cf-col-x page-go-back-to-index" data-cf-layout='{
+                "paddingLeft":20,
+                "height":30,
+                "width":70,
+                "fontSize":24
+            }'>返回</div>
+            <div class="cf-col-x" data-cf-layout='{
+                    "textAlign":"center",
+                    "fontSize":30,
+                    "height":30,
+                    "width":500
+                }'>滤镜</div>
+            <div class="cf-col-x page-go-to-setting" data-cf-layout='{
+                "paddingRight":20,
+                "width":70,
+                "paddingTop":4,
+                "height":30,
+                "lineHeight":30,
+                "fontSize":0,
+                "textAlign":"right"
+            }' id="page-filters-more"><img src="img/temp/filters/icon/show_more_setting.png" data-cf-layout='{
+                    "width":34
+                }'></div>
+        </div>
+    </div>
+
+    <div class="cf-row" id="page-filters-preview-panel" data-cf-layout='{
+            "height":480,
+            "width":640,
+            "marginBottom":118
+        }'><img id="page-filters-preview" src=""></div>
+
+    <div class="cf-row" id="page-filters-list-panel" data-cf-layout='{
+            "minHeight":342
+        }'>
+        <div id="page-filters-list-panel-inner" data-cf-layout='{
+                "paddingLeft":10,
+                "paddingTop":10,
+                "width":1400,
+                "marginBottom":46,
+                "height":185
+            }'>
+            <div class="cf-col-x page-filter-type page-filter-selected" data-filter-type="origin" data-cf-layout='{
+                    "height":170,
+                    "width":130,
+                    "marginRight":10,
+                    "border":{
+                        "width":2,
+                        "style":"solid",
+                        "color":"transparent"
+                    }
+                }'>
+                <img src="" class="page-filter-small-preview">
+                <img src="" class="page-filter-cache-preview">
+                <div class="cf-absolute-left-bottom-row page-filter-name" data-cf-layout='{"fontSize":18}'>原图</div>
+            </div>
+
+            <div class="cf-col-x page-filter-type" data-filter-type="soften-face" data-cf-layout='{
+                    "height":170,
+                    "width":130,
+                    "marginRight":10,
+                    "border":{
+                        "width":2,
+                        "style":"solid",
+                        "color":"transparent"
+                    }
+                }'>
+                <img src="" class="page-filter-small-preview">
+                <img src="" class="page-filter-cache-preview">
+                <div class="cf-absolute-left-bottom-row page-filter-name" data-cf-layout='{"fontSize":18}'>美颜</div>
+            </div>
+
+            <div class="cf-col-x page-filter-type" data-filter-type="sketch" data-cf-layout='{
+                    "height":170,
+                    "width":130,
+                    "marginRight":10,
+                    "border":{
+                        "width":2,
+                        "style":"solid",
+                        "color":"transparent"
+                    }
+                }'>
+                <img src="" class="page-filter-small-preview">
+                <img src="" class="page-filter-cache-preview">
+                <div class="cf-absolute-left-bottom-row page-filter-name" data-cf-layout='{"fontSize":18}'>素描</div>
+            </div>
+
+            <div class="cf-col-x page-filter-type" data-filter-type="vintage" data-cf-layout='{
+                    "height":170,
+                    "width":130,
+                    "marginRight":10,
+                    "border":{
+                        "width":2,
+                        "style":"solid",
+                        "color":"transparent"
+                    }
+                }'>
+                <img src="" class="page-filter-small-preview">
+                <img src="" class="page-filter-cache-preview">
+                <div class="cf-absolute-left-bottom-row page-filter-name" data-cf-layout='{"fontSize":18}'>复古</div>
+            </div>
+        </div>
+
+        <div class="cf-row">
+            <div class="cf-col-x" data-cf-layout='{
+                    "paddingLeft":40
+                }'><img src="img/temp/filters/icon/back.png" id="page-cancel-use-img" data-cf-layout='{
+                        "width":36
+                    }'></div>
+
+            <div class="cf-col-x" data-cf-layout='{
+                    "paddingRight":40,
+                    "float":"right"
+                }'><img src="img/temp/filters/icon/ok.png" id="page-use-filter-img" data-cf-layout='{
+                        "width":32
+                    }'></div>
+        </div>
+    </div>
+    <div id="page-filter-loading-page">
+        <div class="page-loading-container page-load-ani" data-cf-layout='{"marginTop":400}'>
+            <div class="page-loader"></div>
+        </div>
+    </div>
+</div>
+<!-- end: 滤镜页面 -->
+
 <div id="page-show-blog-img-panel" data-cf-layout='{
         "paddingLeft":20,
         "paddingRight":20,
@@ -1077,6 +1310,7 @@
 <script src="js/lib/jquery.exif.js"></script>
 <script src="js/lib/MegaPixImage.js"></script>
 <script src="js/lib/common.js"></script>
+<script src="js/lib/AlloyImage/alloyimage.js"></script>
 <!--1.0.18-->
 <script src="js/page/index.js?v=0.0.1"></script>
 <script>
@@ -1096,6 +1330,15 @@
             $side_menu:$("#page-side-menu"),
             $share_btn:$(".page-share-btn"),
             $tag_input:$("#page-tag-input"),
+            $filter_panel:$("#page-filters-panel"),
+            $filter_list:$("#page-filters-list-panel"),
+            $filter_type:$(".page-filter-type"),
+            $filter_img_preview_panel:$("#page-filters-preview-panel"),
+            $filter_img_preview:$("#page-filters-preview"),
+            $filter_loading:$("#page-filter-loading-page"),
+            $all_filter_cache:$("img.page-filter-cache-preview"),
+            $cancel_use_img:$("#page-cancel-use-img"),
+            $use_filter_img:$("#page-use-filter-img"),
             $main_page:{
                 $panel:$("#page-main-panel"),
                 $footer:$("#page-main-footer")
@@ -1136,7 +1379,8 @@
             publish_status:false,publish_type:'photo',
             blog_img_size:156*g_var.scale_ratio,
             show_blog_img_panel_width:g_jq_dom.$show_blog_img_panel.width(),
-            show_blog_img_panel_height:g_var.wnd_height
+            show_blog_img_panel_height:g_var.wnd_height,
+            $org_filter_img:null
         });
     }
 
@@ -1376,7 +1620,7 @@
         if($this_img.hasClass('page-blog-play-video-btn')){
             $this_img = $this_img.siblings("img");
         }
-        var $this_panel = $this_img.parents('.page-img-panel');
+
         var $all_img = $this_img;//$this_panel.find('img');
 
         g_jq_dom.$show_blog_img_panel.find('img').remove();
@@ -1456,12 +1700,47 @@
             $this.blur();
         }
     }
+
+    function show_filter_img(){
+        var $this = $(this);
+
+        if($this.hasClass('page-filter-selected')){return;}
+        var filter_type = $this.attr('data-filter-type');
+        var $cur_filter = g_jq_dom.$filter_list.find(".page-filter-selected");
+
+        $cur_filter.removeClass('page-filter-selected');
+        $this.addClass('page-filter-selected');
+
+        var $this_cache_img = $this.find(".page-filter-cache-preview");
+        if($this_cache_img.hasClass('page-filter-done')){
+            g_jq_dom.$filter_img_preview.attr('src', $this_cache_img.attr('src'));
+        } else {
+            do_filter(g_var.$org_filter_img, g_jq_dom.$filter_img_preview, filter_type);
+        }
+    }
+
+    function init_filter_panel($img, $cache_img){
+        var org_src = $img.attr('src');
+        var org_cache_src = $cache_img.attr('src');
+        g_jq_dom.$filter_type.each(function(){
+            var $this = $(this);
+            var $this_img = $this.find("img.page-filter-small-preview");
+            var $this_cache_img = $this.find(".page-filter-cache-preview");
+            var filter_type = $this.attr('data-filter-type');
+            $this_img.attr('src', org_src).removeClass('page-filter-done');
+            $this_cache_img.attr('src', org_cache_src).removeClass('page-filter-done');
+            common_fit_img($this, $this_img);
+            do_filter($this_img, $this_img, filter_type);
+            do_filter($this_cache_img, $this_cache_img, filter_type);
+        });
+    }
     function page_event_bind(){
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
         g_jq_dom.$pre_publish_page.$buttons.$type_btn.on(g_event.touchend, scene_swap_to_publish);
         g_jq_dom.$page_opt.$back_to_main.on(g_event.touchend, refresh_page);
-        g_jq_dom.$add_img_btn.on(g_event.touchend, start_shooting);
+//        g_jq_dom.$add_img_btn.on(g_event.touchend, start_shooting);
+        g_jq_dom.$add_img_btn.on(g_event.touchend, start_filter_shooting);
         g_jq_dom.$img_slide_left.on(g_event.touchend, img_prev);
         g_jq_dom.$img_slide_right.on(g_event.touchend, img_next);
         g_jq_dom.$publish_page.$footer.on(g_event.touchend, publish_article);
@@ -1474,12 +1753,77 @@
         g_jq_dom.$tag_input.on(g_event.blur, show_tag);
         g_jq_dom.$tag_input.on(g_event.keydown, filter_tag_input);
         g_jq_dom.$tag_input.on(g_event.keypress, input_enter);
-
         g_jq_dom.$share_btn.on(g_event.touchend, switch_share_status);
+        g_jq_dom.$filter_type.on(g_event.touchend, show_filter_img);
+        g_jq_dom.$cancel_use_img.on(g_event.touchend, cancel_use_img);
+        g_jq_dom.$use_filter_img.on(g_event.touchend, use_filter_img);
 
         g_jq_dom.$page_opt.$page_refresh.on(g_event.touchend, function(){location.reload()});
 
         slide_feeling();
+    }
+
+    function start_filter_shooting(){
+        var $small_img = $("<img style='display:none'>");
+        $small_img.appendTo(g_jq_dom.$body);
+        g_var.$org_filter_img = $("<img>");
+        camera_plus.start_camera({
+            show_panel:g_var.$org_filter_img,
+            small_img:$small_img,
+            callback:function(){
+                g_jq_dom.$filter_img_preview.attr('src', g_var.$org_filter_img.attr('src'));
+                common_fit_img(g_jq_dom.$filter_img_preview_panel, g_jq_dom.$filter_img_preview);
+                init_filter_panel($small_img, g_var.$org_filter_img);
+                g_jq_dom.$filter_panel.show();
+                g_jq_dom.$filter_loading.fadeIn(200);
+            }
+        });
+    }
+
+    function common_fit_img($panel, $img){
+        var panel_width = $panel.width();
+        var panel_height = $panel.height();
+
+        var dom_img = $img.get(0);
+        var img_width = dom_img.width;
+        var img_height = dom_img.height;
+
+        var img_scale_width;
+
+        if(img_width <= panel_width && img_height <= panel_height){
+            $img.css({marginTop: (panel_height - img_height) / 2})
+        } else if(img_width <= panel_width && img_height >= panel_height){
+            $img.css({height:panel_height})
+        } else if(img_width >= panel_width && img_height <= panel_height){
+            $img.css({width:panel_width});
+            img_scale_width = panel_width / img_width;
+            $img.css({marginTop: (panel_height - img_height * img_scale_width) / 2})
+        } else {
+            var panel_ratio = panel_width / panel_height;
+            var img_ratio = img_width / img_height;
+
+            if(panel_ratio <= img_ratio){
+                $img.css({width:panel_width});
+                img_scale_width = panel_width / img_width;
+                $img.css({marginTop: (img_height - img_height * img_scale_width) / 2})
+            } else {
+                $img.css({height:img_height});
+            }
+        }
+    }
+
+    function cancel_use_img(){
+        g_jq_dom.$filter_panel.fadeOut(200);
+    }
+
+    function use_filter_img(){
+        var $new_img = $('<div class="cf-row page-shown-img" style="height:100%"><img class="page-blog-img"><div>');
+        var $img_el = $new_img.find('img');
+        $img_el.attr('src', g_jq_dom.$filter_img_preview.attr('src'));
+        g_jq_dom.$img_list.children().hide().removeClass("page-shown-img");
+        $new_img.appendTo(g_jq_dom.$img_list);
+        resize_img($img_el);
+        g_jq_dom.$filter_panel.fadeOut(200);
     }
 
     function start_shooting(){
@@ -1642,6 +1986,9 @@
     $(function(){
         page_init();
         page_event_bind();
+        g_jq_dom.$filter_panel.css({
+            "minHeight":g_var.wnd_height
+        });
         g_jq_dom.$show_blog_img_panel.css({
             "height":g_var.wnd_height
         });
@@ -1655,7 +2002,41 @@
         img_show_timer();
         init_timer();
         init_calendar();
+
+        $AI.useWorker("js/lib/AlloyImage/alloyimage.js");
     });
+</script>
+
+<script>
+    function do_filter($src, $target, type){
+        var src_dom_img = $src.get(0);
+        var target_dom_img = $target.get(0);
+        var filter_list = {
+            "origin":"origin",
+            "soften-face":"softenFace",
+            "sketch":"sketch",
+            "vintage":"vintage"
+        };
+
+        if('origin' == type){
+            $target.addClass('page-filter-done');
+        }
+
+        var ai = AlloyImage(src_dom_img);
+        ai.ps(filter_list[type]).replace(target_dom_img).complete(function () {
+            $target.addClass('page-filter-done');
+            var cache_complete_flag = true;
+            g_jq_dom.$all_filter_cache.each(function(){
+                if(!$(this).hasClass('page-filter-done')){
+                    cache_complete_flag = false;
+                    return false;
+                }
+            });
+            if(cache_complete_flag){
+                g_jq_dom.$filter_loading.fadeOut(200);
+            }
+        });
+    }
 </script>
 </body>
 </html>
