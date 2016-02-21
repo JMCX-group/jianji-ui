@@ -230,6 +230,19 @@
             border-color: #fff !important;
         }
 
+        #page-publish-privileges{
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: rgb(61,61,73);
+            color:#fff;
+        }
+
+        #page-publish-privileges .page-privileges-selected{
+            color:rgb(168,193,246);
+            background-color: rgba(168,193,246,0.2);
+        }
         .animated {
             -webkit-animation-duration: 0.4s;
             /*-webkit-animation-delay: 0.4s;*/
@@ -323,7 +336,7 @@
             "paddingTop":100,
             "paddingBottom":40,
             "fontSize":0
-        }'><img src="img/temp/demo_head_famale.png" data-cf-layout='{
+        }'><img src="img/temp/demo_head_female.png" data-cf-layout='{
                 "border":{
                     "width":8,
                     "style":"solid",
@@ -839,7 +852,7 @@
                 "lineHeight":60
             }'>
             <div class="cf-col-x" data-cf-layout='{"width":30}'><img src="img/temp/publish/icon_public.png" class="cf-img-bkg" data-cf-layout='{"width":30,"marginTop":20}'></div>
-            <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22}'>公开</div>
+            <div class="cf-col-x" data-cf-layout='{"width":510,"paddingLeft":30,"fontSize":22}' id="page-change-privileges-btn">公开（所有人可见）</div>
             <div class="cf-col-x" data-cf-layout='{"width":20,"textAlign":"right"}'><img src="img/temp/publish/icon_arrow.png" data-cf-layout='{"width":14}'></div>
         </div>
 
@@ -889,6 +902,32 @@
                 }'><img src="img/temp/publish/share_douban.png" data-cf-layout='{"width":100}' data-share-base="share_douban" class="cf-img-bkg page-share-btn">
             </div>
         </div>
+    </div>
+    <div id="page-publish-privileges" data-cf-layout='{
+            "width":540,
+            "left":50
+        }'>
+        <div class="cf-row page-publish-privileges-item page-privileges-selected"
+             data-cf-layout='{
+                "height":60,
+                "lineHeight":60,
+                "fontSize":24,
+                "paddingLeft":30
+            }'>公开（所有人可见）</div>
+        <div class="cf-row page-publish-privileges-item"
+             data-cf-layout='{
+                "height":60,
+                "lineHeight":60,
+                "fontSize":24,
+                "paddingLeft":30
+            }'>私有（仅自己可见）</div>
+        <div class="cf-row page-publish-privileges-item"
+             data-cf-layout='{
+                "height":60,
+                "lineHeight":60,
+                "fontSize":24,
+                "paddingLeft":30
+            }'>发布至广场（提问 / 求漫画）</div>
     </div>
 </div>
 <!-- end: 发布界面 -->
@@ -1340,6 +1379,9 @@
             $cancel_use_img:$("#page-cancel-use-img"),
             $use_filter_img:$("#page-use-filter-img"),
             $filter_back_to_publish:$("#page-filter-back-to-publish"),
+            $change_privileges_btn:$("#page-change-privileges-btn"),
+            $publish_privileges_panel:$("#page-publish-privileges"),
+            $publish_privileges_item:$(".page-publish-privileges-item"),
             $main_page:{
                 $panel:$("#page-main-panel"),
                 $footer:$("#page-main-footer")
@@ -1735,6 +1777,23 @@
             do_filter($this_cache_img, $this_cache_img, filter_type);
         });
     }
+    function show_privileges_panel(){
+        var btn_pos = g_jq_dom.$change_privileges_btn.offset();
+        var btn_height = g_jq_dom.$change_privileges_btn.height();
+        g_jq_dom.$publish_privileges_panel.css({top:btn_pos.top+btn_height});
+        if(g_jq_dom.$publish_privileges_panel.hasClass('page-shown')){
+            g_jq_dom.$publish_privileges_panel.stop().fadeOut(200).removeClass('page-shown');
+        } else {
+            g_jq_dom.$publish_privileges_panel.stop().fadeIn(200).addClass('page-shown');
+        }
+    }
+    function change_privileges(){
+        var $this = $(this);
+        g_jq_dom.$publish_privileges_panel.find(".page-privileges-selected").removeClass('page-privileges-selected');
+        $this.addClass('page-privileges-selected');
+        g_jq_dom.$change_privileges_btn.text($this.text());
+        g_jq_dom.$publish_privileges_panel.stop().fadeOut(200).removeClass('page-shown');
+    }
     function page_event_bind(){
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
@@ -1759,6 +1818,8 @@
         g_jq_dom.$cancel_use_img.on(g_event.touchend, cancel_use_img);
         g_jq_dom.$filter_back_to_publish.on(g_event.touchend, cancel_use_img);
         g_jq_dom.$use_filter_img.on(g_event.touchend, use_filter_img);
+        g_jq_dom.$change_privileges_btn.on(g_event.touchend, show_privileges_panel);
+        g_jq_dom.$publish_privileges_item.on(g_event.touchend, change_privileges);
 
         g_jq_dom.$page_opt.$page_refresh.on(g_event.touchend, function(){location.reload()});
 
@@ -1989,6 +2050,7 @@
     $(function(){
         page_init();
         page_event_bind();
+//        console.log(g_jq_dom.$publish_privileges_panel);
         g_jq_dom.$filter_panel.css({
             "minHeight":g_var.wnd_height
         });
