@@ -941,7 +941,7 @@
                 "height":30,
                 "lineHeight":30
             }'>
-            <div class="cf-col-x page-go-back-to-index" data-cf-layout='{
+            <div class="cf-col-x" id="page-filter-back-to-publish" data-cf-layout='{
                 "paddingLeft":20,
                 "height":30,
                 "width":70,
@@ -1339,6 +1339,7 @@
             $all_filter_cache:$("img.page-filter-cache-preview"),
             $cancel_use_img:$("#page-cancel-use-img"),
             $use_filter_img:$("#page-use-filter-img"),
+            $filter_back_to_publish:$("#page-filter-back-to-publish"),
             $main_page:{
                 $panel:$("#page-main-panel"),
                 $footer:$("#page-main-footer")
@@ -1756,6 +1757,7 @@
         g_jq_dom.$share_btn.on(g_event.touchend, switch_share_status);
         g_jq_dom.$filter_type.on(g_event.touchend, show_filter_img);
         g_jq_dom.$cancel_use_img.on(g_event.touchend, cancel_use_img);
+        g_jq_dom.$filter_back_to_publish.on(g_event.touchend, cancel_use_img);
         g_jq_dom.$use_filter_img.on(g_event.touchend, use_filter_img);
 
         g_jq_dom.$page_opt.$page_refresh.on(g_event.touchend, function(){location.reload()});
