@@ -336,7 +336,8 @@
             "paddingTop":100,
             "paddingBottom":40,
             "fontSize":0
-        }'><img src="img/temp/demo_head_female.png" data-cf-layout='{
+        }'><?php if(isset($_GET['head'])){ ?>
+            <img src="img/temp/big_user_head/<?php echo $_GET['head'];?>" data-cf-layout='{
                 "border":{
                     "width":8,
                     "style":"solid",
@@ -346,6 +347,19 @@
                 "width":180,
                 "boxSizing":"border-box"
             }'>
+        <?php } else { ?>
+        <img src="img/temp/demo_head_female.png" data-cf-layout='{
+                "border":{
+                    "width":8,
+                    "style":"solid",
+                    "color":"#fff"
+                },
+                "borderRadius":"50%",
+                "width":180,
+                "boxSizing":"border-box"
+            }'>
+        <?php }?>
+
     </div>
     <div class="cf-row cf-text-center" data-cf-layout='{
             "height":40,
