@@ -84,6 +84,16 @@ function page_layout($el, undefined){
 
         layout_cfg = JSON.parse(layout_cfg);
 
+        if(layout_cfg.minHeight){
+            layout_cfg.minHeight = Math.floor(layout_cfg.minHeight * g_var.scale_ratio);
+            if(0 == layout_cfg.minHeight){layout_cfg.minHeight = 1;}
+        }
+
+        if(layout_cfg.minWidth){
+            layout_cfg.minWidth = Math.floor(layout_cfg.minWidth * g_var.scale_ratio);
+            if(0 == layout_cfg.minWidth){layout_cfg.minWidth = 1;}
+        }
+
         if(layout_cfg.width){
             layout_cfg.width = Math.floor(layout_cfg.width * g_var.scale_ratio);
             if(0 == layout_cfg.width){layout_cfg.width = 1;}
