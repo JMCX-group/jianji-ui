@@ -44,17 +44,16 @@
         $_input.fileExif(_get_img_orientation);
 
         _file_reader.onload = function(e) {
-            if($_show_panel){
-                _mp_img.render(
-                    $_show_panel.get(0),
-                    { maxWidth: _out_width, maxHeight: _out_height, orientation : _face_orientation}
-                );
-            }
-
             if($_small_img){
                 _mp_img.render(
                     $_small_img.get(0),
                     { maxWidth: 128, maxHeight: 128, orientation : _face_orientation}
+                );
+            }
+            if($_show_panel){
+                _mp_img.render(
+                    $_show_panel.get(0),
+                    { maxWidth: _out_width, maxHeight: _out_height, orientation : _face_orientation}
                 );
             }
             $_show_panel.on("load._camera_plus", function(){
