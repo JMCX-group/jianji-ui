@@ -27,7 +27,7 @@ g_var.scale_ratio = g_var.page_width / 640;
 
 var g_event = {
     css_ani_event:"webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend",
-    touchend:"click",
+    touchend:"touchend",
     touchmove:"touchmove mousewheel",
     touchstart:"touchstart mousedown",
     keypress:"keypress",
