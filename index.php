@@ -1416,6 +1416,7 @@
         });
 
         g_var = $.extend({}, g_var, {
+            body_move_status:false,
             cur_feeling_pos:0,cur_feeling_min:0,cur_feeling_max:388,
             show_menu_status:false,
             pre_publish_status:false,
@@ -1460,6 +1461,7 @@
     }
 
     function scene_reset_to_main(){
+        if(g_var.body_move_status){return;}
         g_var.pre_publish_status = false;
         g_jq_dom.$publish_page.$panel.fadeOut(200);
         g_jq_dom.$publish_page.$footer.fadeOut(200, function(){
@@ -1475,6 +1477,8 @@
         }
     }
     function scene_swap_to_pre_publish(){
+        if(g_var.body_move_status){return;}
+
         if(g_var.pre_publish_status){return;}
         g_var.pre_publish_status = true;
         g_jq_dom.$main_page.$panel.show();
@@ -1487,6 +1491,7 @@
     }
 
     function scene_swap_to_main(){
+        if(g_var.body_move_status){return;}
         g_var.pre_publish_status = false;
         g_jq_dom.$page_mask.stop().fadeOut(200);
         g_jq_dom.$pre_publish_page.$panel.removeClass("animated fadeInUp").addClass("animated fadeOutDown");
@@ -1494,6 +1499,7 @@
     }
 
     function scene_swap_to_publish(){
+        if(g_var.body_move_status){return;}
 //        if(!g_var.pre_publish_status){return;}
         get_location();
         g_var.pre_publish_status = false;
@@ -1512,11 +1518,13 @@
 
     }
     function refresh_page(){
+        if(g_var.body_move_status){return;}
         g_jq_dom.$img_list.children().remove();
         g_jq_dom.$article_text.val('');
         scene_reset_to_main();
     }
     function img_prev(){
+        if(g_var.body_move_status){return;}
         var $current_shown_img = g_jq_dom.$img_list.find(".page-shown-img");
         if(0 == $current_shown_img.length){
             g_jq_dom.$img_list.children().last().show().addClass("page-shown-img");
@@ -1531,6 +1539,7 @@
         }
     }
     function img_next(){
+        if(g_var.body_move_status){return;}
         var $current_shown_img = g_jq_dom.$img_list.find(".page-shown-img");
 
         $current_shown_img.hide().removeClass("page-shown-img");
@@ -1570,6 +1579,7 @@
         });
     }
     function publish_article(){
+        if(g_var.body_move_status){return;}
         if(g_var.publish_status) {return;}
         g_var.publish_status = true;
         var $all_img = g_jq_dom.$img_list.find("img.page-blog-img");
@@ -1621,6 +1631,7 @@
     }
 
     function toggle_menu(){
+        if(g_var.body_move_status){return;}
         g_jq_dom.$side_menu.off(g_event.css_ani_event);
         var shown = g_jq_dom.$side_menu.hasClass("page-menu-shown");
         if(shown){
@@ -1642,6 +1653,7 @@
     }
 
     function remove_publish_img(){
+        if(g_var.body_move_status){return;}
         var $this = $(this);
         var $this_img = $this.parent();
         $this_img.remove();
@@ -1649,6 +1661,7 @@
     }
 
     function switch_share_status(){
+        if(g_var.body_move_status){return;}
         var $this = $(this);
         var share_base = 'img/temp/publish/'+$this.attr('data-share-base');
         if($this.hasClass("page-share-selected")){
@@ -1659,6 +1672,7 @@
     }
 
     function show_blog_img(){
+        if(g_var.body_move_status){return;}
         var $this_img = $(this);
         if($this_img.hasClass('page-blog-play-video-btn')){
             $this_img = $this_img.siblings("img");
@@ -1708,6 +1722,7 @@
         });
     }
     function hide_blog_img(){
+        if(g_var.body_move_status){return;}
         if(!g_jq_dom.$show_blog_img_panel.hasClass('page-shown')){return;}
         g_jq_dom.$show_blog_img_panel.stop().fadeOut(200);
         g_jq_dom.$show_blog_img_panel.removeClass('page-shown');
@@ -1745,6 +1760,7 @@
     }
 
     function show_filter_img(){
+        if(g_var.body_move_status){return;}
         var $this = $(this);
 
         if($this.hasClass('page-filter-selected')){return;}
@@ -1778,6 +1794,7 @@
         });
     }
     function show_privileges_panel(){
+        if(g_var.body_move_status){return;}
         var btn_pos = g_jq_dom.$change_privileges_btn.offset();
         var btn_height = g_jq_dom.$change_privileges_btn.height();
         g_jq_dom.$publish_privileges_panel.css({top:btn_pos.top+btn_height});
@@ -1788,6 +1805,7 @@
         }
     }
     function change_privileges(){
+        if(g_var.body_move_status){return;}
         var $this = $(this);
         g_jq_dom.$publish_privileges_panel.find(".page-privileges-selected").removeClass('page-privileges-selected');
         $this.addClass('page-privileges-selected');
@@ -1795,6 +1813,7 @@
         g_jq_dom.$publish_privileges_panel.stop().fadeOut(200).removeClass('page-shown');
     }
     function page_event_bind(){
+        g_jq_dom.$body.on(g_event.touchmove, function(){g_var.body_move_status = true}).on(g_event.touchend, function(){g_var.body_move_status = false});
         g_jq_dom.$page_opt.$write.on(g_event.touchend, scene_swap_to_pre_publish);
         g_jq_dom.$pre_publish_page.$buttons.$close_btn.on(g_event.touchend, scene_swap_to_main);
         g_jq_dom.$pre_publish_page.$buttons.$type_btn.on(g_event.touchend, scene_swap_to_publish);
@@ -1821,12 +1840,13 @@
         g_jq_dom.$change_privileges_btn.on(g_event.touchend, show_privileges_panel);
         g_jq_dom.$publish_privileges_item.on(g_event.touchend, change_privileges);
 
-        g_jq_dom.$page_opt.$page_refresh.on(g_event.touchend, function(){location.reload()});
+        g_jq_dom.$page_opt.$page_refresh.on(g_event.touchend, function(){if(g_var.body_move_status){return;}location.reload()});
 
         slide_feeling();
     }
 
     function start_filter_shooting(){
+        if(g_var.body_move_status){return;}
         var $small_img = $("<img style='display:none'>");
         $small_img.appendTo(g_jq_dom.$body);
         g_var.$org_filter_img = $("<img>");
@@ -1876,10 +1896,12 @@
     }
 
     function cancel_use_img(){
+        if(g_var.body_move_status){return;}
         g_jq_dom.$filter_panel.fadeOut(200);
     }
 
     function use_filter_img(){
+        if(g_var.body_move_status){return;}
         var $new_img = $('<div class="cf-row page-shown-img" style="height:100%"><img class="page-blog-img"><div>');
         var $img_el = $new_img.find('img');
         g_jq_dom.$remove_img_temp.clone().show().appendTo($new_img);
