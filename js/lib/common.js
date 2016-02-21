@@ -4,7 +4,7 @@
  */
 (function(win, $, undefined){
     var _camera_plus = function(){};
-    var $_input, $_show_panel;
+    var $_input, $_show_panel, $_small_img;
     var _out_width, _out_height, _file_reader=new FileReader(), _mp_img, _face_orientation;
     var _callback;
 
@@ -12,6 +12,7 @@
         _out_width = options.width || 512;
         _out_height = options.height || 512;
         $_show_panel = options.show_panel || undefined;
+        $_small_img = options.small_img || undefined;
         _callback = options.callback;
         $_input.click();
     };
@@ -47,6 +48,13 @@
                 _mp_img.render(
                     $_show_panel.get(0),
                     { maxWidth: _out_width, maxHeight: _out_height, orientation : _face_orientation}
+                );
+            }
+
+            if($_small_img){
+                _mp_img.render(
+                    $_small_img.get(0),
+                    { maxWidth: 128, maxHeight: 128, orientation : _face_orientation}
                 );
             }
             $_show_panel.on("load._camera_plus", function(){
