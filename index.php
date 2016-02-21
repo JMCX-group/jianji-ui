@@ -1821,6 +1821,7 @@
     function use_filter_img(){
         var $new_img = $('<div class="cf-row page-shown-img" style="height:100%"><img class="page-blog-img"><div>');
         var $img_el = $new_img.find('img');
+        g_jq_dom.$remove_img_temp.clone().show().appendTo($new_img);
         $img_el.attr('src', g_jq_dom.$filter_img_preview.attr('src'));
         g_jq_dom.$img_list.children().hide().removeClass("page-shown-img");
         $new_img.appendTo(g_jq_dom.$img_list);
