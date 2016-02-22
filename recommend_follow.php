@@ -45,7 +45,7 @@
                     "height":50,
                     "lineHeight":50,
                     "fontSize":0
-                }'><img src="img"></div>
+                }'><img src="img/temp/recommend_follow/"></div>
             <div class="cf-col-x"></div>
         </div>
     </div>
