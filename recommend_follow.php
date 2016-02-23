@@ -82,13 +82,13 @@
                         "left":30,
                         "top":2
                      }'>
-                <img src="img/temp/recommend_follow/head_1.png" data-cf-layout='{
+                <img src="img/temp/recommend_follow/head_1.png" class="page-user-head-img" data-cf-layout='{
                         "width":114,
                         "left":51,
                         "top":23
                      }'>
                 <img src="img/temp/recommend_follow/icon/head_selected_bkg.png" data-cf-layout='{"left":126,"top":86,"width":70}'>
-                <img src="img/temp/recommend_follow/icon/head_unselected.png" data-cf-layout='{"left":146,"top":106,"width":30}'>
+                <img src="img/temp/recommend_follow/icon/head_unselected.png" class="page-user-select-ico" data-cf-layout='{"left":146,"top":106,"width":30}'>
             </div>
             <div class="cf-col-x cf-pull-right page-desc-box" data-cf-layout='{
                     "height":160,
@@ -123,7 +123,7 @@
         <div class="cf-row" data-cf-layout='{
                 "marginBottom":50
             }'>
-            <div class="cf-col-x page-head-col" data-cf-layout='{
+            <div class="cf-col-x page-head-col page-user-follow-selected" data-cf-layout='{
                     "height":160,
                     "fontSize":0
                 }'>
@@ -132,13 +132,13 @@
                         "left":30,
                         "top":2
                      }'>
-                <img src="img/temp/recommend_follow/head_2.png" data-cf-layout='{
+                <img src="img/temp/recommend_follow/head_2.png" class="page-user-head-img" data-cf-layout='{
                         "width":114,
                         "left":51,
                         "top":23
                      }'>
                 <img src="img/temp/recommend_follow/icon/head_selected_bkg.png" data-cf-layout='{"left":126,"top":86,"width":70}'>
-                <img src="img/temp/recommend_follow/icon/head_selected.png" data-cf-layout='{"left":146,"top":106,"width":30}'>
+                <img src="img/temp/recommend_follow/icon/head_selected.png" class="page-user-select-ico" data-cf-layout='{"left":146,"top":106,"width":30}'>
             </div>
             <div class="cf-col-x cf-pull-right page-desc-box" data-cf-layout='{
                     "height":160,
@@ -173,7 +173,7 @@
         <div class="cf-row" data-cf-layout='{
                 "marginBottom":50
             }'>
-            <div class="cf-col-x page-head-col" data-cf-layout='{
+            <div class="cf-col-x page-head-col page-user-follow-selected" data-cf-layout='{
                     "height":160,
                     "fontSize":0
                 }'>
@@ -182,13 +182,13 @@
                         "left":30,
                         "top":2
                      }'>
-                <img src="img/temp/recommend_follow/head_3.png" data-cf-layout='{
+                <img src="img/temp/recommend_follow/head_3.png" class="page-user-head-img" data-cf-layout='{
                         "width":114,
                         "left":51,
                         "top":23
                      }'>
                 <img src="img/temp/recommend_follow/icon/head_selected_bkg.png" data-cf-layout='{"left":126,"top":86,"width":70}'>
-                <img src="img/temp/recommend_follow/icon/head_selected.png" data-cf-layout='{"left":146,"top":106,"width":30}'>
+                <img src="img/temp/recommend_follow/icon/head_selected.png" class="page-user-select-ico" data-cf-layout='{"left":146,"top":106,"width":30}'>
             </div>
             <div class="cf-col-x cf-pull-right page-desc-box" data-cf-layout='{
                     "height":160,
@@ -223,7 +223,7 @@
         <div class="cf-row" data-cf-layout='{
                 "marginBottom":50
             }'>
-            <div class="cf-col-x page-head-col" data-cf-layout='{
+            <div class="cf-col-x page-head-col page-user-follow-selected" data-cf-layout='{
                     "height":160,
                     "fontSize":0
                 }'>
@@ -232,13 +232,13 @@
                         "left":30,
                         "top":2
                      }'>
-                <img src="img/temp/recommend_follow/head_4.png" data-cf-layout='{
+                <img src="img/temp/recommend_follow/head_4.png" class="page-user-head-img" data-cf-layout='{
                         "width":114,
                         "left":51,
                         "top":23
                      }'>
                 <img src="img/temp/recommend_follow/icon/head_selected_bkg.png" data-cf-layout='{"left":126,"top":86,"width":70}'>
-                <img src="img/temp/recommend_follow/icon/head_selected.png" data-cf-layout='{"left":146,"top":106,"width":30}'>
+                <img src="img/temp/recommend_follow/icon/head_selected.png" class="page-user-select-ico" data-cf-layout='{"left":146,"top":106,"width":30}'>
             </div>
             <div class="cf-col-x cf-pull-right page-desc-box" data-cf-layout='{
                     "height":160,
@@ -289,14 +289,50 @@
 <script>
     function page_init(){
         g_jq_dom = $.extend({}, g_jq_dom, {
-            $main_panel:$("#page-follow-list")
+            $main_panel:$("#page-follow-list"),
+            $user_select_btn:$(".page-user-head-img"),
+            $submit:$("#page-submit")
         });
 
         g_jq_dom.$main_panel.css({
             "min-height":g_var.wnd_height
-        })
+        });
+
+        g_var = $.extend({}, g_var, {
+            body_move_status:false
+        });
     }
-    function bind_event(){}
+
+    function jump_to_index(){
+        if(g_var.body_move_status){return;}
+        <?php if(isset($_GET['head'])){ ?>
+        location.href = 'index.php?head='+'<?php echo $_GET['head'];?>';
+        <?php } else { ?>
+        location.href = 'index.php';
+        <?php } ?>
+    }
+    function toggle_select(){
+        if(g_var.body_move_status){return;}
+        var $this_head = $(this).parent();
+        var $select_ico = $this_head.find('.page-user-select-ico');
+        var select_status = $this_head.hasClass('page-user-follow-selected');
+
+        if(select_status){
+            $select_ico.attr('src', 'img/temp/recommend_follow/icon/head_unselected.png');
+            $this_head.removeClass('page-user-follow-selected');
+        } else {
+            $select_ico.attr('src', 'img/temp/recommend_follow/icon/head_selected.png');
+            $this_head.addClass('page-user-follow-selected');
+        }
+    }
+    function bind_event(){
+        g_jq_dom.$body
+            .on(g_event.touchmove, function(){g_var.body_move_status = true})
+            .on(g_event.touchend, function(){g_var.body_move_status = false});
+        g_jq_dom.$user_select_btn.on(g_event.touchend,toggle_select);
+        g_jq_dom.$submit.on(g_event.touchend,jump_to_index);
+    }
+
     $(function(){
         page_init();
         bind_event();

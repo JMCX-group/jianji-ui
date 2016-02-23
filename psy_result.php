@@ -364,7 +364,7 @@ $result_vector = $all_psy_type[$psy_vector_index];
         g_jq_dom.$body.on(g_event.blur, '.page-tag-input-control input', input_blur);
 
         g_jq_dom.$page_goto_index.on(g_event.touchend, function(){
-            location.href = 'index.php?head='+'<?php  echo $result_vector['big_head'];?>';
+            location.href = 'recommend_follow.php?head='+'<?php  echo $result_vector['big_head'];?>';
         })
     }
     $(function(){
