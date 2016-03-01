@@ -340,6 +340,9 @@ if(!isset($_GET['head'])){
         #page-map{
             font-size: 0;
         }
+        #page-archive{
+            display: none;
+        }
         .page-map-img-bottom{
             width: 100%;
             position: absolute;
