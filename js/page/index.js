@@ -114,7 +114,12 @@ function scene_reset_to_main(){
     g_var.pre_publish_status = false;
     g_jq_dom.$publish_page.$panel.fadeOut(200);
     g_jq_dom.$publish_page.$footer.fadeOut(200, function(){
-        g_jq_dom.$main_page.$panel.show();
+
+        if('timeline' == g_page_type){
+            g_jq_dom.$main_page.$panel.show();
+        } else {
+            $("#page-archive").show();
+        }
     });
 
     g_jq_dom.$page_mask.stop().fadeOut(200);
@@ -130,7 +135,12 @@ function scene_swap_to_pre_publish(){
 
     if(g_var.pre_publish_status){return;}
     g_var.pre_publish_status = true;
-    g_jq_dom.$main_page.$panel.show();
+    if('timeline' == g_page_type){
+        g_jq_dom.$main_page.$panel.show();
+    } else {
+        $("#page-archive").show();
+    }
+    //g_jq_dom.$main_page.$panel.show();
     if(g_var.show_menu_status){
         toggle_menu();
     }
@@ -161,6 +171,7 @@ function scene_swap_to_publish(){
     g_jq_dom.$publish_page.$footer.show().stop().fadeIn(200);
 
     g_jq_dom.$main_page.$panel.hide();
+    $("#page-archive").hide();
     g_jq_dom.$page_mask.stop().fadeOut(200);
     g_jq_dom.$pre_publish_page.$panel.removeClass("animated fadeInUp").addClass("animated fadeOutDown");
     g_jq_dom.$pre_publish_page.$footer.fadeOut(200);
