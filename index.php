@@ -337,6 +337,12 @@
         #page-map{
             font-size: 0;
         }
+        .page-map-img-bottom{
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
     </style>
 </head>
 <body class="cf-invisible">
@@ -348,7 +354,7 @@
     <div class="cf-row" id="page-lbs-pic-panel-outer" data-cf-layout='{
             "width":640,
             "height":660
-        }'><div id="page-lbs-pic-panel-inner" class="cf-row"></div></div>
+        }'><div id="page-lbs-pic-panel-inner" class="cf-row"></div><img src="img/temp/index/map/img_bottom.png" class="page-map-img-bottom"></div>
     <div class="cf-row" id="page-lbs-map" data-cf-layout='{
             "width":640
         }'></div>
@@ -407,9 +413,10 @@
 
     function fit_img(panel_width, panel_height, $img){
         var $this = $img;
+        var dom_img = $this.get(0);
 
-        var img_width = this.width;
-        var img_height = this.height;
+        var img_width = dom_img.width;
+        var img_height = dom_img.height;
 
         var img_ratio = img_width / img_height;
         var panel_ratio = panel_width / panel_height;
@@ -420,9 +427,9 @@
             $this.css({width:panel_width});
         } else {
             if(img_ratio > panel_ratio){
-                $this.css({width:panel_width});
-            } else {
                 $this.css({height:panel_height});
+            } else {
+                $this.css({width:panel_width});
             }
         }
 
