@@ -5,7 +5,7 @@
  */
 
 if(!isset($_GET['head'])){
-    $_GET['head'] = 'dog';
+    $_GET['head'] = 'dog.png';
 }
 ?>
 <!DOCTYPE html>
