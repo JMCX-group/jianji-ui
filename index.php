@@ -408,6 +408,9 @@
             "archive":$("#page-archive")
         };
 
+        if('map' == g_page_type){
+            $('body').on(g_event.touchmove, function(e){e.stopPropagation();e.preventDefault();});
+        }
         page_list[g_page_type].show();
     }
 
@@ -482,18 +485,15 @@
         var start_x = 0, start_margin_left = 0;
         var last_map_idx = 0;
         $lbs_pic_panel_inner.on(g_event.touchstart, function(e){
-//            if(g_var.body_move_status){return;}
             if(scroll_flag){return;}
             start_x = e.originalEvent.touches[0].clientX;
             start_margin_left = parseInt($lbs_pic_panel_inner.css("marginLeft")) || 0;
         }).on(g_event.touchmove, function(e){
-//            if(g_var.body_move_status){return;}
             if(scroll_flag){return;}
             var current_x = e.originalEvent.touches[0].clientX;
 
             $lbs_pic_panel_inner.css({marginLeft:start_margin_left+current_x-start_x})
         }).on(g_event.touchend, function(e){
-//            if(g_var.body_move_status){return;}
             if(scroll_flag){return;}
             scroll_flag = true;
 
