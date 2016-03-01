@@ -8,21 +8,21 @@
     <div class="cf-col-x cf-text-center" data-cf-layout='{
                 "width":128
             }'>
-        <div class="cf-row" data-cf-layout='{
+        <a href="index.php?page_type=timeline" class="cf-row" data-cf-layout='{
                     "fontSize":0,
                     "paddingBottom":6
-                }'><img src="img/temp/index/icon/timeline.png" class="page-operation-timeline" data-cf-layout='{"width":34}'></div>
-        <div class="cf-row">时间轴</div>
+                }'><img src="img/temp/index/icon/timeline.png" class="page-operation-timeline" data-cf-layout='{"width":34}'></a>
+        <a href="index.php?page_type=timeline" class="cf-row">时间轴</a>
     </div>
 
     <div class="cf-col-x cf-text-center" data-cf-layout='{
                 "width":128
             }'>
-        <div class="cf-row" data-cf-layout='{
+        <a href="index.php?page_type=map" class="cf-row" data-cf-layout='{
                     "fontSize":0,
                     "paddingBottom":6
-                }'><img src="img/temp/index/icon/map.png" class="page-operation-map" data-cf-layout='{"width":34,"paddingLeft":6}'></div>
-        <div class="cf-row">足迹</div>
+                }'><img src="img/temp/index/icon/map.png" class="page-operation-map" data-cf-layout='{"width":34,"paddingLeft":6}'></a>
+        <a href="index.php?page_type=map" class="cf-row">足迹</a>
     </div>
 
     <div class="cf-col-x cf-text-center" data-cf-layout='{
@@ -38,11 +38,11 @@
     <div class="cf-col-x cf-text-center" data-cf-layout='{
                 "width":128
             }'>
-        <div class="cf-row" data-cf-layout='{
+        <a href="index.php?page_type=archive" class="cf-row" data-cf-layout='{
                     "fontSize":0,
                     "paddingBottom":6
-                }'><img src="img/temp/index/icon/archive.png" class="page-operation-archive" data-cf-layout='{"width":34}'></div>
-        <div class="cf-row page-operation-archive">档案室</div>
+                }'><img src="img/temp/index/icon/archive.png" class="page-operation-archive" data-cf-layout='{"width":34}'></a>
+        <a href="index.php?page_type=archive" class="cf-row page-operation-archive">档案室</a>
     </div>
 
     <div class="cf-col-x cf-text-center" data-cf-layout='{
