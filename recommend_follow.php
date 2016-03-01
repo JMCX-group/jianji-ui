@@ -306,7 +306,7 @@
     function jump_to_index(){
         if(g_var.body_move_status){return;}
         <?php if(isset($_GET['head'])){ ?>
-        location.href = 'index.php?head='+'<?php echo $_GET['head'];?>';
+        location.href = 'select_page_to_show.php?head='+'<?php echo $_GET['head'];?>';
         <?php } else { ?>
         location.href = 'index.php';
         <?php } ?>

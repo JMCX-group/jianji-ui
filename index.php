@@ -3,6 +3,10 @@
  * Created by JMCX - WHY
  * Date: 2016/1/30
  */
+
+if(!isset($_GET['head'])){
+    $_GET['head'] = 'dog';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -360,6 +364,17 @@
         }'></div>
 </div>
 
+<div class="cf-row" id="page-archive">
+    <img src="img/temp/index/archive/bkg.jpg" class="cf-img-bkg">
+    <div class="page-operation-write" data-cf-layout='{
+            "position":"absolute",
+            "left":70,
+            "top":660,
+            "width":120,
+            "height":120
+        }'></div>
+</div>
+
 <div class="cf-row" id="page-blur-mask"></div>
 
 <?php require_once(dirname(__FILE__) . '/page_parts/index/pre_publish_panel.php');?>
@@ -393,7 +408,7 @@
 <script src="js/lib/common.js"></script>
 <script src="js/lib/AlloyImage/alloyimage.js"></script>
 <!--1.0.18-->
-<script src="js/page/index.js?v=0.0.2"></script>
+<script src="js/page/index.js?v=0.0.3"></script>
 
 <script>
     var g_page_type = 'timeline';
