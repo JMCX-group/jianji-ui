@@ -2020,10 +2020,19 @@
         month_day = month_day - 3;
         if(month_day < 0){
             cur_month -= 1;
-            month_day = day_in_month[cur_month] + month_day;
+            month_day = day_in_month[cur_month] + month_day + 1;
+        } else if (0 == month_day) {
+            month_day = day_in_month[cur_month];
         }
 
-        week_day = (week_day - 3) % 7;
+        week_day = (week_day - 3);
+        if(week_day != 0){
+            if(week_day < 0){
+                week_day += 1;
+            }
+            week_day = week_day % 7;
+        }
+
 
         function is_leap_year(full_year){
             if(!isNaN(parseInt(full_year))){
@@ -2037,7 +2046,7 @@
             }
         }
         if(is_leap_year(full_year)){
-            day_in_month[1] = 29;
+            day_in_month[2] = 29;
         }
 
         var i = 0;
