@@ -483,7 +483,7 @@
 
         var scroll_flag = false;
         var start_x = 0, start_margin_left = 0;
-        var last_map_idx = 0;
+        var last_map_idx = 0, last_x = 0;
         $lbs_pic_panel_inner.on(g_event.touchstart, function(e){
             if(scroll_flag){return;}
             start_x = e.originalEvent.touches[0].clientX;
@@ -491,6 +491,7 @@
         }).on(g_event.touchmove, function(e){
             if(scroll_flag){return;}
             var current_x = e.originalEvent.touches[0].clientX;
+            last_x = current_x;
 
             $lbs_pic_panel_inner.css({marginLeft:start_margin_left+current_x-start_x})
         }).on(g_event.touchend, function(e){
@@ -507,12 +508,16 @@
                 dest_margin = pic_panel_outer_width-inner_width;
                 dest_idx = data_len - 1;
             } else {
-                dest_margin = last_margin_left + pic_panel_outer_width / 2;
+                var ani_line = pic_panel_outer_width / 4;
+                dest_margin = last_margin_left + ani_line;
                 if(dest_margin >= 0){
                     dest_margin = 0;
                     dest_idx = 0;
                 } else {
-                    var multiple =  Math.floor((Math.abs(last_margin_left) + pic_panel_outer_width / 2)/pic_panel_outer_width);
+                    if(last_x < start_x){
+                        ani_line = ani_line*3;
+                    }
+                    var multiple =  Math.floor((Math.abs(last_margin_left) + ani_line)/pic_panel_outer_width);
                     dest_margin = -pic_panel_outer_width * multiple;
 
                     dest_idx = multiple;
