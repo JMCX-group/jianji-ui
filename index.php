@@ -3,7 +3,6 @@
  * Created by JMCX - WHY
  * Date: 2016/1/30
  */
-
 if(!isset($_GET['head'])){
     $_GET['head'] = 'dog.png';
 }
