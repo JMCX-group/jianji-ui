@@ -427,6 +427,11 @@ if(!isset($_GET['head'])){
 
         if('map' == g_page_type){
             $('body').on(g_event.touchmove, function(e){e.stopPropagation();e.preventDefault();});
+            $("img.page-operation-map").attr('src', 'img/temp/index/icon/map_selected.png');
+        } else if ('archive' == g_page_type){
+            $("img.page-operation-archive").attr('src', 'img/temp/index/icon/archive_selected.png');
+        } else {
+            $("img.page-operation-archive").attr('src', 'img/temp/index/icon/timeline_selected.png')
         }
         page_list[g_page_type].show();
     }
