@@ -431,7 +431,7 @@ if(!isset($_GET['head'])){
         } else if ('archive' == g_page_type){
             $("img.page-operation-archive").attr('src', 'img/temp/index/icon/archive_selected.png');
         } else {
-            $("img.page-operation-archive").attr('src', 'img/temp/index/icon/timeline_selected.png')
+            $("img.page-operation-timeline").attr('src', 'img/temp/index/icon/timeline_selected.png')
         }
         page_list[g_page_type].show();
     }
