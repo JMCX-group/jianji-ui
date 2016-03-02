@@ -12,7 +12,7 @@
                     "fontSize":0,
                     "paddingBottom":6
                 }'><img src="img/temp/index/icon/timeline.png" class="page-operation-timeline" data-cf-layout='{"width":34}'></a>
-        <a href="index.php?page_type=timeline&head=<?php echo $_GET['head']?>" class="cf-row">时间轴</a>
+        <a href="index.php?page_type=timeline&head=<?php echo $_GET['head']?>" class="cf-row page-operation-timeline">时间轴</a>
     </div>
 
     <div class="cf-col-x cf-text-center" data-cf-layout='{
@@ -22,7 +22,7 @@
                     "fontSize":0,
                     "paddingBottom":6
                 }'><img src="img/temp/index/icon/map.png" class="page-operation-map" data-cf-layout='{"width":34,"paddingLeft":6}'></a>
-        <a href="index.php?page_type=map&head=<?php echo $_GET['head']?>" class="cf-row">足迹</a>
+        <a href="index.php?page_type=map&head=<?php echo $_GET['head']?>" class="cf-row page-operation-map">足迹</a>
     </div>
 
     <div class="cf-col-x cf-text-center" data-cf-layout='{
