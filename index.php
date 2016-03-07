@@ -349,6 +349,14 @@ if(!isset($_GET['head'])){
             left: 0;
             bottom: 0;
         }
+        .page-print-btn{
+            position: absolute;
+            border:1px solid rgba(255,255,255,0.8);
+            background-color: rgba(255,255,255,0.2);
+            font-size: 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
     </style>
 </head>
 <body class="cf-invisible">
@@ -375,6 +383,9 @@ if(!isset($_GET['head'])){
             "width":120,
             "height":120
         }'></div>
+    <a class="page-print-btn" href="do_print.php" data-cf-layout='{"left":260,"top":658,"width":120,"height":120,"paddingTop":38}'>
+        <img src="img/temp/index/archive/print_btn.png" data-cf-layout='{"width":44}'>
+    </a>
 </div>
 
 <div class="cf-row" id="page-blur-mask"></div>
