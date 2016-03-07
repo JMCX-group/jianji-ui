@@ -21,6 +21,8 @@
         }
 
         #page-photo-list{
+            overflow: hidden;
+            overflow-x: scroll;
             display: none;
         }
         #page-location-select{
@@ -44,6 +46,27 @@
 
         .page-time-title{
             color:#fff;
+        }
+
+        .page-map-icon{
+            position: absolute;
+            display: none;
+            left: 0;
+            top: 0;
+        }
+
+        .page-remove-photo-btn{
+            position: absolute;
+            right: 0;
+            top:0;
+            display: none;
+        }
+
+        .page-photo-icon{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            display: none;
         }
 
         #page-end-time,
@@ -87,9 +110,8 @@
                     "height":30,
                     "width":400
                 }'>打印照片</div>
-                <div class="cf-col-x page-go-to-setting" data-cf-layout='{
+                <div class="cf-col-x" data-cf-layout='{
                 "paddingRight":20,
-                "paddingTop":4,
                 "height":30,
                 "width":120,
                 "textAlign":"right"
@@ -99,20 +121,40 @@
             </div>
         </div>
         <div class="cf-row page-print-panel">
-            <div class="cf-row page-photo-panel" data-cf-layout='{
+            <div class="cf-row" id="page-photo-panel" data-cf-layout='{
                     "fontSize":0
                 }'>
-                <div class="cf-row" data-cf-layout='{"paddingBottom":20}'>
-                    <div class="cf-col-x" data-cf-layout='{"paddingRight":20}'><img src="img/temp/print/add_photo_btn.png" data-cf-layout='{"width":310}'></div>
-                    <div class="cf-col-x"><img src="img/temp/print/add_photo_btn.png" data-cf-layout='{"width":310}'></div>
+                <div class="cf-row" data-cf-layout='{"paddingBottom":20,"fontSize":0}'>
+                    <div class="cf-col-x" data-cf-layout='{"marginRight":20}'>
+                        <img src="img/temp/print/add_photo_btn.png" class="page-blank-photo" data-cf-layout='{"width":310}'>
+                        <img src="img/temp/print/icon/remove_photo.png" class="page-remove-photo-btn" data-cf-layout='{"width":24}'>
+                        <img src="img/temp/print/icon/place_on_photo.png" class="page-photo-icon" data-cf-layout='{"width":50,"right":20,"bottom":10}'>
+                    </div>
+                    <div class="cf-col-x">
+                        <img src="img/temp/print/add_photo_btn.png" class="page-blank-photo" data-cf-layout='{"width":310}'>
+                        <img src="img/temp/print/icon/remove_photo.png" class="page-remove-photo-btn" data-cf-layout='{"width":24}'>
+                        <img src="img/temp/print/icon/place_on_photo.png" class="page-photo-icon" data-cf-layout='{"width":50,"right":20,"bottom":10}'>
+                    </div>
                 </div>
-                <div class="cf-row" data-cf-layout='{"paddingBottom":20}'>
-                    <div class="cf-col-x" data-cf-layout='{"paddingRight":20}'><img src="img/temp/print/add_photo_btn.png" data-cf-layout='{"width":310}'></div>
-                    <div class="cf-col-x"><img src="img/temp/print/add_photo_btn.png" data-cf-layout='{"width":310}'></div>
+                <div class="cf-row" data-cf-layout='{"paddingBottom":20,"fontSize":0}'>
+                    <div class="cf-col-x" data-cf-layout='{"marginRight":20}'>
+                        <img src="img/temp/print/add_photo_btn.png" class="page-blank-photo" data-cf-layout='{"width":310}'>
+                        <img src="img/temp/print/icon/remove_photo.png" class="page-remove-photo-btn" data-cf-layout='{"width":24}'>
+                        <img src="img/temp/print/icon/place_on_photo.png" class="page-photo-icon" data-cf-layout='{"width":50,"right":20,"bottom":10}'>
+                    </div>
+                    <div class="cf-col-x">
+                        <img src="img/temp/print/add_photo_btn.png" class="page-blank-photo" data-cf-layout='{"width":310}'>
+                        <img src="img/temp/print/icon/remove_photo.png" class="page-remove-photo-btn" data-cf-layout='{"width":24}'>
+                        <img src="img/temp/print/icon/place_on_photo.png" class="page-photo-icon" data-cf-layout='{"width":50,"right":20,"bottom":10}'>
+                    </div>
                 </div>
             </div>
-            <div class="cf-row page-map-panel" data-cf-layout='{"fontSize":0}'>
+            <div class="cf-row" id="page-map-panel" data-cf-layout='{"fontSize":0}'>
                 <img src="img/temp/print/map/map1.png" data-cf-layout='{"width":640}'>
+                <img src="img/temp/print/icon/place_on_map.png" class="page-map-icon page-map-icon-1" data-cf-layout='{"left":328,"top":75,"width":22}'>
+                <img src="img/temp/print/icon/food_on_map.png" class="page-map-icon page-map-icon-2" data-cf-layout='{"left":358,"top":160,"width":22}'>
+                <img src="img/temp/print/icon/place_on_map.png" class="page-map-icon page-map-icon-3" data-cf-layout='{"left":256,"top":120,"width":22}'>
+                <img src="img/temp/print/icon/place_on_map.png" class="page-map-icon page-map-icon-4" data-cf-layout='{"left":442,"top":130,"width":22}'>
             </div>
         </div>
         <div class="cf-row page-photo-filter-panel" data-cf-layout='{"fontSize":0}'>
@@ -134,8 +176,32 @@
                     <input placeholder="" type="date" id="page-end-time-input">
                 </div>
             </div>
-            <div class="cf-row" id="page-photo-list">
-                <div></div>
+            <div class="cf-col-x" data-cf-layout='{"width":530}' id="page-photo-list">
+                <div class="cf-row" data-cf-layout='{
+                        "width":650,
+                        "fontSize":0
+                    }'>
+                    <img src="img/temp/print/temp/photo_small_1.png"
+                         data_photo_key="photo-1"
+                         data-cf-layout='{"width":150,"paddingTop":27,"paddingLeft":5,"paddingRight":5}'
+                         data-ext-info='{"big":"photo_big_1.png","icon_on_photo":"place_on_photo.png","icon_on_map_idx":1}'>
+
+                    <img src="img/temp/print/temp/photo_small_2.png"
+                         data_photo_key="photo-2"
+                         data-cf-layout='{"width":150,"paddingTop":27,"paddingLeft":5,"paddingRight":5}'
+                         data-ext-info='{"big":"photo_big_2.png","icon_on_photo":"food_on_photo.png","icon_on_map_idx":2}'>
+
+
+                    <img src="img/temp/print/temp/photo_small_3.png"
+                         data_photo_key="photo-3"
+                         data-cf-layout='{"width":150,"paddingTop":27,"paddingLeft":5,"paddingRight":5}'
+                         data-ext-info='{"big":"photo_big_3.png","icon_on_photo":"place_on_photo.png","icon_on_map_idx":3}'>>
+
+                    <img src="img/temp/print/temp/photo_small_4.png"
+                         data_photo_key="photo-4"
+                         data-cf-layout='{"width":150,"paddingTop":27,"paddingLeft":5,"paddingRight":5}'
+                         data-ext-info='{"big":"photo_big_4.png","icon_on_photo":"place_on_photo.png","icon_on_map_idx":4}'>
+                </div>
             </div>
             <div class="cf-col-x" id="page-do-photo-filter" data-cf-layout='{"float":"right"}'><img src="img/temp/print/filter_ok_enabled_btn.png" data-cf-layout='{"width":60}'></div>
         </div>
@@ -147,6 +213,8 @@
     function page_init(){
         g_jq_dom = $.extend({}, g_jq_dom, {
             $main_page:$("#page-main-panel"),
+            $photo_panel:$("#page-photo-panel"),
+            $map_panel:$("#page-map-panel"),
             $location_selected:$("#page-selected-location"),
             $location_select:$("#page-location-select"),
             $start_time:$("#page-start-time"),
@@ -249,6 +317,49 @@
             if(g_var.body_move_status){return;}
             hide_photo_filter_panel();
         });
+
+        function show_photo(){
+            var $this = $(this);
+            if(g_var.body_move_status){return;}
+            if($this.hasClass('page-photo-added')){return;}
+
+            var $blank_photo = g_jq_dom.$photo_panel.find('img.page-blank-photo').first();
+            if(0 !== $blank_photo.length){
+
+                var this_ext_info = JSON.parse($this.attr('data-ext-info'));
+                var this_key = $this.attr('data_photo_key');
+                var $photo_cell = $blank_photo.parent();
+
+                $blank_photo.attr('src', 'img/temp/print/temp/' + this_ext_info.big);
+                $photo_cell.attr('photo-key', this_key);
+                $photo_cell.attr('map-idx', this_ext_info.icon_on_map_idx);
+                $photo_cell.find('img.page-photo-icon').attr('src', 'img/temp/print/icon/' + this_ext_info.icon_on_photo).show();
+                $photo_cell.find('img.page-remove-photo-btn').show();
+                g_jq_dom.$map_panel.find('img.page-map-icon-'+this_ext_info.icon_on_map_idx).show();
+
+                $blank_photo.removeClass('page-blank-photo').addClass('page-photo');
+                $this.addClass('page-photo-added').fadeTo(200,0.5);
+
+            }
+        }
+        function remove_photo(){
+            var $this = $(this);
+            if(g_var.body_move_status){return;}
+            var $photo_cell = $this.parent();
+
+            $this.hide();
+            $photo_cell.find('img.page-photo').attr('src', 'img/temp/print/add_photo_btn.png').addClass('page-blank-photo');
+            $photo_cell.find('img.page-photo-icon').attr('src','').hide();
+
+            var key = $photo_cell.attr('photo-key');
+            var map_idx = $photo_cell.attr('map-idx');
+
+            g_jq_dom.$photo_list.find("img[data_photo_key='"+key+"']").removeClass('page-photo-added').fadeTo(200,1);
+            g_jq_dom.$map_panel.find('img.page-map-icon-'+map_idx).hide();
+        }
+
+        g_jq_dom.$photo_panel.on(g_event.touchend, '.page-remove-photo-btn', remove_photo);
+        g_jq_dom.$photo_list.on(g_event.touchend, 'img', show_photo);
     }
 
     $(function(){
