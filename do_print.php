@@ -103,7 +103,7 @@
                 "height":30,
                 "width":120,
                 "fontSize":24
-            }'>返回</div>
+            }' id="page-go-back">返回</div>
                 <div class="cf-col-x" data-cf-layout='{
                     "textAlign":"center",
                     "fontSize":30,
@@ -224,7 +224,8 @@
             $filter_condition_panel:$("#page-photo-filter-condition-panel"),
             $btn_filter_photo:$("#page-do-photo-filter"),
             $show_condition_panel:$("#page-show-photo-filter-condition"),
-            $photo_list:$("#page-photo-list")
+            $photo_list:$("#page-photo-list"),
+            $go_back_btn:$("#page-go-back")
         });
 
         g_jq_dom.$main_page.css({
@@ -360,6 +361,11 @@
 
         g_jq_dom.$photo_panel.on(g_event.touchend, '.page-remove-photo-btn', remove_photo);
         g_jq_dom.$photo_list.on(g_event.touchend, 'img', show_photo);
+
+        g_jq_dom.$go_back_btn.on(g_event.touchend, function(){
+            if(g_var.body_move_status){return;}
+            history.go(-1);
+        });
     }
 
     $(function(){
