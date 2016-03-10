@@ -76,7 +76,8 @@
                 $main_page:$("#page-main-panel"),
                 $page_bkg:$("#page-bkg"),
                 $show:$("#page-btn-show-msg-type"),
-                $hide:$("#page-btn-hide-msg-type")
+                $hide:$("#page-btn-hide-msg-type"),
+                $go_back_btn:$("#page-go-back")
             });
 
             g_jq_dom.$main_page.css({
@@ -103,6 +104,11 @@
                 g_jq_dom.$page_bkg.attr('src', 'img/temp/dialog/dialog_1.jpg');
                 g_jq_dom.$show.show();
                 g_jq_dom.$hide.hide();
+            });
+
+            g_jq_dom.$go_back_btn.on(g_event.touchend, function(){
+                if(g_var.body_move_status){return;}
+                history.go(-1);
             });
         }
 

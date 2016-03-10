@@ -81,7 +81,8 @@
 <script>
     function page_init(){
         g_jq_dom = $.extend({}, g_jq_dom, {
-            $main_page:$("#page-main-panel")
+            $main_page:$("#page-main-panel"),
+            $go_back_btn:$("#page-go-back")
         });
 
         g_jq_dom.$main_page.css({
@@ -90,7 +91,10 @@
     }
 
     function bind_event(){
-
+        g_jq_dom.$go_back_btn.on(g_event.touchend, function(){
+            if(g_var.body_move_status){return;}
+            history.go(-1);
+        });
     }
 
     $(function(){
