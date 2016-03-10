@@ -28,7 +28,7 @@
                     "top":40
                 }'></div>
 
-        <div class="cf-row page-menu-item" data-cf-layout='{
+        <a href="message_center.php" class="cf-row page-menu-item" data-cf-layout='{
                 "paddingLeft":10,
                 "paddingRight":10,
                 "paddingTop":34,
@@ -38,7 +38,7 @@
                     "width":8,
                     "right":10,
                     "top":40
-                }'></div>
+                }'></a>
 
         <div class="cf-row page-menu-item" data-cf-layout='{
                 "paddingLeft":10,
