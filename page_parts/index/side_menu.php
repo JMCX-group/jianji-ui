@@ -16,7 +16,7 @@
                     "top":40
                 }'></div>
 
-        <div class="cf-row page-menu-item" data-cf-layout='{
+        <a href="index.php?page_type=archive&head=<?php echo $_GET['head']?>" class="cf-row page-menu-item" data-cf-layout='{
                 "paddingLeft":10,
                 "paddingRight":10,
                 "paddingTop":34,
@@ -26,7 +26,7 @@
                     "width":8,
                     "right":10,
                     "top":40
-                }'></div>
+                }'></a>
 
         <a href="message_center.php" class="cf-row page-menu-item" data-cf-layout='{
                 "paddingLeft":10,
@@ -52,7 +52,7 @@
                     "top":40
                 }'></div>
 
-        <div class="cf-row page-menu-item" data-cf-layout='{
+        <a href="index.php?page_type=map&head=<?php echo $_GET['head']?>" class="cf-row page-menu-item" data-cf-layout='{
                 "paddingLeft":10,
                 "paddingRight":10,
                 "paddingTop":34,
@@ -62,7 +62,7 @@
                     "width":8,
                     "right":10,
                     "top":40
-                }'></div>
+                }'></a>
 
         <div class="cf-row page-menu-item" data-cf-layout='{
                 "paddingLeft":10,
