@@ -5,7 +5,7 @@
             "marginLeft":-320,
             "width":640
         }'>
-    <div class="cf-col-x cf-text-center cf-invisible" data-cf-layout='{
+    <div class="cf-col-x cf-text-center" data-cf-layout='{
                 "width":128
             }'>
         <a href="index.php?page_type=timeline&head=<?php echo $_GET['head']?>" class="cf-row" data-cf-layout='{
@@ -15,7 +15,7 @@
         <a href="index.php?page_type=timeline&head=<?php echo $_GET['head']?>" class="cf-row page-operation-timeline">时间轴</a>
     </div>
 
-    <div class="cf-col-x cf-text-center" data-cf-layout='{
+    <div class="cf-col-x cf-text-center cf-invisible" data-cf-layout='{
                 "width":128
             }'>
         <a href="index.php?page_type=map&head=<?php echo $_GET['head']?>" class="cf-row" data-cf-layout='{
